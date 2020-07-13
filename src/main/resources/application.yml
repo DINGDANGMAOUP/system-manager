@@ -2,10 +2,20 @@ server:
   port:
 spring:
   datasource:
-    url:
-    name:
-    password:
-    driver-class-name: com.mysql.jdbc.Driver
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        master:
+          url: http://localhost:3306/domainswitcher
+          username: root
+          password: root
+          driver-class-name: com.mysql.jdbc.Driver
+        slave:
+          url: http://localhost:3306/domainswitcher
+          username: root
+          password: root
+          driver-clss-name: com.mysql.jdbc.Driver
   application:
     name: sysmanager-service
   jackson:
