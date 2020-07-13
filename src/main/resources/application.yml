@@ -1,0 +1,13 @@
+server:
+  port:
+spring:
+  datasource:
+    url:
+    name:
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: sysmanager-service
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    default-property-inclusion: non_null
