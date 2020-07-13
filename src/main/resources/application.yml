@@ -12,7 +12,7 @@ spring:
           password: root
           driver-class-name: com.mysql.jdbc.Driver
         slave:
-          url: http://localhost:3306/domainswitcher
+          url: http://localhost:3306/domainnamechecker
           username: root
           password: root
           driver-clss-name: com.mysql.jdbc.Driver
