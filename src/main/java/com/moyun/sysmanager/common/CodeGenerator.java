@@ -1,87 +1,107 @@
 package com.moyun.sysmanager.common;
 
+import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.GlobalConfig;
-import com.baomidou.mybatisplus.generator.config.PackageConfig;
-import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-import com.baomidou.mybatisplus.generator.config.TemplateConfig;
+import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import org.apache.commons.lang3.StringUtils;
 
-// 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
+import java.util.Scanner;
+
+/**
+ * mybatis plus 提供的代码生成器 可以快速生成 Entity、Mapper、Mapper XML、Service、Controller 等各个模块的代码
+ *
+ * @link https://mp.baomidou.com/guide/generator.html
+ */
 public class CodeGenerator {
 
+  // 数据库 URL
+  private static final String URL =
+      "jdbc:mysql://localhost:3306/domainswitcher?useSSL=false&serverTimezone=UTC";
+  // 数据库驱动
+  private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
+  // 数据库用户名
+  private static final String USERNAME = "root";
+  // 数据库密码
+  private static final String PASSWORD = "root";
+  // @author 值
+  private static final String AUTHOR = "kuroneko";
+  // 包的基础路径
+  private static final String BASE_PACKAGE_URL = "com.moyun.sysmanager";
+  // xml文件路径
+  private static final String XML_PACKAGE_URL = "/src/main/resources/mapper/";
+  // xml 文件模板
+  private static final String XML_MAPPER_TEMPLATE_PATH = "generator/templates/mapper.xml";
+  // mapper 文件模板
+  private static final String MAPPER_TEMPLATE_PATH = "generator/templates/mapper.java";
+  // entity 文件模板
+  private static final String ENTITY_TEMPLATE_PATH = "generator/templates/entity.java";
+  // service 文件模板
+  private static final String SERVICE_TEMPLATE_PATH = "generator/templates/service.java";
+  // serviceImpl 文件模板
+  private static final String SERVICE_IMPL_TEMPLATE_PATH = "generator/templates/serviceImpl.java";
+  // controller 文件模板
+  private static final String CONTROLLER_TEMPLATE_PATH = "generator/templates/controller.java";
 
+  public static void main(String[] args) {
+    AutoGenerator generator = new AutoGenerator();
 
-    public static void run() {
-        // 代码生成器
-        AutoGenerator mpg = new AutoGenerator();
+    // 全局配置
+    GlobalConfig globalConfig = new GlobalConfig();
+    String projectPath = System.getProperty("user.dir");
+    globalConfig.setOutputDir(projectPath + "/src/main/java");
+    globalConfig.setAuthor(AUTHOR);
+    globalConfig.setOpen(false);
+    globalConfig.setFileOverride(false);
+    generator.setGlobalConfig(globalConfig);
 
-        // 全局配置
-        GlobalConfig gc = new GlobalConfig();
-        String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/src/main/java");
-        gc.setAuthor("jobob");
-        gc.setOpen(false);
-        // gc.setSwagger2(true); 实体属性 Swagger2 注解
-        mpg.setGlobalConfig(gc);
+    // 数据源配置
+    DataSourceConfig dataSourceConfig = new DataSourceConfig();
+    dataSourceConfig.setUrl(URL);
+    dataSourceConfig.setDriverName(DRIVER_NAME);
+    dataSourceConfig.setUsername(USERNAME);
+    dataSourceConfig.setPassword(PASSWORD);
+    generator.setDataSource(dataSourceConfig);
 
-        // 数据源配置
-        DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/ant?useUnicode=true&useSSL=false&characterEncoding=utf8");
-        // dsc.setSchemaName("public");
-        dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("密码");
-        mpg.setDataSource(dsc);
+    // 包配置
+    PackageConfig packageConfig = new PackageConfig();
+    packageConfig.setModuleName("sysmanager");
+    packageConfig.setParent(BASE_PACKAGE_URL);
+    generator.setPackageInfo(packageConfig);
 
-        // 包配置
-        PackageConfig pc = new PackageConfig();
-        pc.setModuleName("模块名");
-        pc.setParent("com.baomidou.ant");
-        mpg.setPackageInfo(pc);
+    // 配置自定义代码模板
+    TemplateConfig templateConfig = new TemplateConfig();
+    templateConfig.setXml(XML_MAPPER_TEMPLATE_PATH);
+    templateConfig.setMapper(MAPPER_TEMPLATE_PATH);
+    templateConfig.setEntity(ENTITY_TEMPLATE_PATH);
+    templateConfig.setService(SERVICE_TEMPLATE_PATH);
+    templateConfig.setServiceImpl(SERVICE_IMPL_TEMPLATE_PATH);
+    templateConfig.setController(CONTROLLER_TEMPLATE_PATH);
+    generator.setTemplate(templateConfig);
 
+    // 策略配置
+    StrategyConfig strategy = new StrategyConfig();
+    strategy.setNaming(NamingStrategy.underline_to_camel);
+    strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+    strategy.setEntityLombokModel(true);
+    strategy.setRestControllerStyle(true);
+    strategy.setInclude(scanner("表名"));
+    strategy.setSuperEntityColumns("id");
+    strategy.setControllerMappingHyphenStyle(true);
+    strategy.setTablePrefix(packageConfig.getModuleName() + "_");
+    generator.setStrategy(strategy);
+    generator.setTemplateEngine(new FreemarkerTemplateEngine());
+    generator.execute();
+  }
 
-
-        // 如果模板引擎是 freemarker
-        String templatePath = "/templates/mapper.xml.ftl";
-        // 如果模板引擎是 velocity
-//         String templatePath = "/templates/mapper.xml.vm";
-
-
-
-
-
-        // 配置模板
-        TemplateConfig templateConfig = new TemplateConfig();
-
-        // 配置自定义输出模板
-        //指定自定义模板路径，注意不要带上.ftl/.vm, 会根据使用的模板引擎自动识别
-        // templateConfig.setEntity("templates/entity2.java");
-        // templateConfig.setService();
-        // templateConfig.setController();
-
-        templateConfig.setXml(null);
-        mpg.setTemplate(templateConfig);
-
-        // 策略配置
-        StrategyConfig strategy = new StrategyConfig();
-        strategy.setNaming(NamingStrategy.underline_to_camel);
-        strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("你自己的父类实体,没有就不用设置!");
-        strategy.setEntityLombokModel(true);
-        strategy.setRestControllerStyle(true);
-        // 公共父类
-        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
-        // 写于父类中的公共字段
-        strategy.setSuperEntityColumns("id");
-        strategy.setInclude(("表名，多个英文逗号分割").split(","));
-        strategy.setControllerMappingHyphenStyle(true);
-        strategy.setTablePrefix(pc.getModuleName() + "_");
-        mpg.setStrategy(strategy);
-        mpg.setTemplateEngine(new FreemarkerTemplateEngine());
-        mpg.execute();
+  private static String scanner(String tip) {
+    Scanner scanner = new Scanner(System.in);
+    System.out.println(("请输入" + tip + "："));
+    if (scanner.hasNext()) {
+      String ipt = scanner.next();
+      if (StringUtils.isNotBlank(ipt)) return ipt;
     }
-
+    throw new MybatisPlusException("请输入正确的" + tip + "！");
+  }
 }

@@ -1,21 +1,28 @@
 server:
-  port:
+  port: 9876
 spring:
   datasource:
     dynamic:
-      primary: master
+      hikari:
+        idle-timeout: 600000
+        connection-timeout: 30000
+        max-lifetime: 1800000
+        max-pool-size: 10
+        min-idle: 2
+      primary: domainswitcher
       strict: false
       datasource:
-        master:
-          url: http://localhost:3306/domainswitcher
+        domainswitcher:
+          url: jdbc:mysql://localhost:3306/domainswitcher?useSSL=false&serverTimezone=UTC
           username: root
           password: root
-          driver-class-name: com.mysql.jdbc.Driver
-        slave:
-          url: http://localhost:3306/domainnamechecker
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        domainnamechecker:
+          url: jdbc:mysql://localhost:3306/domainnamechecker?useSSL=false&serverTimezone=UTC
           username: root
           password: root
-          driver-clss-name: com.mysql.jdbc.Driver
+          driver-clss-name: com.mysql.cj.jdbc.Driver
+
   application:
     name: sysmanager-service
   jackson:
