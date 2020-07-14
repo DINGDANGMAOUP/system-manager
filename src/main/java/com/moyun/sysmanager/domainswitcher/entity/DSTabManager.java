@@ -22,7 +22,7 @@ public class DSTabManager implements Serializable {
     /**
      * 管理员表ID
      */
-            @TableId(value = "tid", type = IdType.UUID)
+            @TableId(value = "tid", type = IdType.AUTO)
     private Integer tid;
 
     /**

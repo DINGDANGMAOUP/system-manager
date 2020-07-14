@@ -21,7 +21,7 @@ public class DSTabNotifyLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-            @TableId(value = "tid", type = IdType.UUID)
+            @TableId(value = "tid", type = IdType.AUTO)
     private Integer tid;
 
         @TableField("domainName")

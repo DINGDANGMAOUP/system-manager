@@ -21,7 +21,7 @@ public class DSTabDomainName implements Serializable {
   private static final long serialVersionUID = 1L;
 
   /** 域名表ID */
-  @TableId(value = "tid", type = IdType.UUID)
+  @TableId(value = "tid", type = IdType.AUTO)
   private Integer tid;
 
   /** 域名或URL */

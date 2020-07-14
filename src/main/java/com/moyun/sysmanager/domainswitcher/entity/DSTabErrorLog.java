@@ -24,7 +24,7 @@ public class DSTabErrorLog implements Serializable {
     /**
      * 异常表ID
      */
-            @TableId(value = "tid", type = IdType.UUID)
+            @TableId(value = "tid", type = IdType.AUTO)
     private Integer tid;
 
     /**

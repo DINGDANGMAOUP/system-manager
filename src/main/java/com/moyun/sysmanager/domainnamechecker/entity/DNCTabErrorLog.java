@@ -2,6 +2,7 @@ package com.moyun.sysmanager.domainnamechecker.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -17,12 +18,13 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@TableName("tab_error_log")
 public class DNCTabErrorLog implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   /** 异常表ID */
-  @TableId(value = "tid", type = IdType.UUID)
+  @TableId(value = "tid", type = IdType.AUTO)
   private Integer tid;
 
   /** 异常的域名或URL */

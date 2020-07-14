@@ -3,7 +3,10 @@ package com.moyun.sysmanager.domainnamechecker.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -16,12 +19,13 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@TableName("tab_domain_name")
 public class DNCTabDomainName implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   /** 域名表ID */
-  @TableId(value = "tid", type = IdType.UUID)
+  @TableId(value = "tid", type = IdType.AUTO)
   private Integer tid;
 
   /** 域名或URL */

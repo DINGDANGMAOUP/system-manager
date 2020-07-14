@@ -2,6 +2,7 @@ package com.moyun.sysmanager.domainnamechecker.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,12 +16,13 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@TableName("tab_manager")
 public class DNCTabManager implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
   /** 管理员表ID */
-  @TableId(value = "tid", type = IdType.UUID)
+  @TableId(value = "tid", type = IdType.AUTO)
   private Integer tid;
 
   /** 管理员手机号码 */

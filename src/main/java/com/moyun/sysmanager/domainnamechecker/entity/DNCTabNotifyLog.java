@@ -2,6 +2,7 @@ package com.moyun.sysmanager.domainnamechecker.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
@@ -17,11 +18,12 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@TableName("tab_notify_log")
 public class DNCTabNotifyLog implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  @TableId(value = "tid", type = IdType.UUID)
+  @TableId(value = "tid", type = IdType.AUTO)
   private Integer tid;
 
   @TableField("domainName")
