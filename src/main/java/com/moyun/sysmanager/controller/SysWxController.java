@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("domain")
-public class SysWxController {
+public class SysWxController extends LogBackController{
   //域名
   @Resource
   DNCTabDomainNameService TDNService;
