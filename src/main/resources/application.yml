@@ -28,3 +28,12 @@ spring:
   jackson:
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
     default-property-inclusion: non_null
+#mybatis plus 设置
+mybatis-plus:
+  type-aliases-package: com.moyun.sysmanager.domainnamechecker.entity,com.moyun.sysmanager.domainswitcher.entity
+  mapper-locations: classpath:mapper/*/*.xml
+  configuration:
+    jdbc-type-for-null: null
+  global-config:
+    # 关闭 mybatis-plus的 banner
+    banner: false
