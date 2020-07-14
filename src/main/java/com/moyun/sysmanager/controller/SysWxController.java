@@ -54,9 +54,9 @@ public class SysWxController {
     TDNService.saveOrUpdate(dncTabDomainName);
     return Result.success();
   }
-  @GetMapping
-  public Result search(@RequestParam String domainName){
-   List<DNCTabDomainName> res= TDNService.search(domainName);
+  @GetMapping("search")
+  public Result search(@RequestParam String key){
+   List<DNCTabDomainName> res= TDNService.search(key);
    return Result.success(res);
   }
 
