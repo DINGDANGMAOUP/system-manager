@@ -1,0 +1,33 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.dynamic.hikari.idle-timeout",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.dynamic.hikari.idle-timeout."
+    },
+    {
+      "name": "spring.datasource.dynamic.hikari.connection-timeout",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.dynamic.hikari.connection-timeout."
+    },
+    {
+      "name": "spring.datasource.dynamic.hikari.max-lifetime",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.dynamic.hikari.max-lifetime."
+    },
+    {
+      "name": "spring.datasource.dynamic.hikari.max-pool-size",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.dynamic.hikari.max-pool-size."
+    },
+    {
+      "name": "spring.datasource.dynamic.hikari.min-idle",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.dynamic.hikari.min-idle."
+    },
+    {
+      "name": "spring.datasource.dynamic.strict",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.dynamic.strict."
+    }
+  ] }
