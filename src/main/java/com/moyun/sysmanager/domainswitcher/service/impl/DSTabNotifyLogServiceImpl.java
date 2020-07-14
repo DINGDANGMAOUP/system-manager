@@ -6,11 +6,7 @@ import com.moyun.sysmanager.domainswitcher.service.DSTabNotifyLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-/**
- * @author kuroneko
- */
+/** @author kuroneko */
 @Service
-public class DSTabNotifyLogServiceImpl extends ServiceImpl<DSTabNotifyLogMapper, DSTabNotifyLog> implements
-    DSTabNotifyLogService {
-
-}
+public class DSTabNotifyLogServiceImpl extends ServiceImpl<DSTabNotifyLogMapper, DSTabNotifyLog>
+    implements DSTabNotifyLogService {}

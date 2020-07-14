@@ -18,17 +18,16 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class DSTabSwitchLog implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id",type = IdType.AUTO)
-    private Long id;
-    private String originDomain;
+  @TableId(value = "id", type = IdType.AUTO)
+  private Long id;
 
-    private String newDomain;
+  private String originDomain;
 
-    private LocalDateTime switchTime;
+  private String newDomain;
 
-    private Integer switchResult;
+  private LocalDateTime switchTime;
 
-
+  private Integer switchResult;
 }

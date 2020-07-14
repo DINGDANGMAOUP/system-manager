@@ -19,28 +19,20 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class DSTabErrorLog implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 异常表ID
-     */
-            @TableId(value = "tid", type = IdType.AUTO)
-    private Integer tid;
+  /** 异常表ID */
+  @TableId(value = "tid", type = IdType.AUTO)
+  private Integer tid;
 
-    /**
-     * 异常的域名或URL
-     */
-        @TableField("domainName")
-    private String domainName;
+  /** 异常的域名或URL */
+  @TableField("domainName")
+  private String domainName;
 
-    /**
-     * 异常说明
-     */
-        @TableField("errorContent")
-    private String errorContent;
+  /** 异常说明 */
+  @TableField("errorContent")
+  private String errorContent;
 
-        @TableField("errorTime")
-    private LocalDateTime errorTime;
-
-
+  @TableField("errorTime")
+  private LocalDateTime errorTime;
 }

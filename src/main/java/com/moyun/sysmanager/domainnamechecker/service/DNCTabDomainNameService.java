@@ -4,9 +4,7 @@ import com.moyun.sysmanager.domainnamechecker.entity.DNCTabDomainName;
 import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.List;
 
-/**
- * @author kuroneko
- */
+/** @author kuroneko */
 public interface DNCTabDomainNameService extends IService<DNCTabDomainName> {
 
   List<DNCTabDomainName> listSort();

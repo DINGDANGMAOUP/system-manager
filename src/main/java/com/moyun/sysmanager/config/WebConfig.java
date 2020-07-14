@@ -37,8 +37,6 @@ public class WebConfig {
     return messageSource;
   }
 
-
-
   @Bean
   public FilterRegistrationBean multipartFilterRegistrationBean() {
     final MultipartFilter multipartFilter = new MultipartFilter();

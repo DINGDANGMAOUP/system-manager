@@ -7,12 +7,8 @@ import com.moyun.sysmanager.domainnamechecker.service.DNCTabNotifyLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-/**
- * @author kuroneko
- */
+/** @author kuroneko */
 @Service
 @DS("DNC")
-public class DNCTabNotifyLogServiceImpl extends ServiceImpl<DNCTabNotifyLogMapper, DNCTabNotifyLog> implements
-    DNCTabNotifyLogService {
-
-}
+public class DNCTabNotifyLogServiceImpl extends ServiceImpl<DNCTabNotifyLogMapper, DNCTabNotifyLog>
+    implements DNCTabNotifyLogService {}

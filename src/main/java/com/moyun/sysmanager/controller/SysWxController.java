@@ -19,47 +19,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("domain")
-public class SysWxController extends LogBackController{
-  //域名
-  @Resource
-  DNCTabDomainNameService TDNService;
-  //域名异常记录
-  @Resource
-  DNCTabErrorLogService TELService;
-  //管理员
-  @Resource
-  DNCTabNotifyLogService TNLService;
-  //异常通知
-  @Resource
-  DNCTabManagerService TMService;
-
+public class SysWxController {
+  // 域名
+  @Resource DNCTabDomainNameService TDNService;
+  // 域名异常记录
+  @Resource DNCTabErrorLogService TELService;
+  // 管理员
+  @Resource DNCTabNotifyLogService TNLService;
+  // 异常通知
+  @Resource DNCTabManagerService TMService;
 
   /**
    * 获取域名高可用列表
+   *
    * @return
    */
   @GetMapping
-  public Result findAll(){
-    List<DNCTabDomainName> list=TDNService.listSort();
+  public Result findAll() {
+    List<DNCTabDomainName> list = TDNService.listSort();
     return Result.success(list);
   }
 
   /**
    * 启用或停止域名 或添加域名
+   *
    * @param dncTabDomainName
    * @return
    */
   @PostMapping("update")
-  public Result updateByState(@RequestBody DNCTabDomainName dncTabDomainName){
+  public Result updateByState(@RequestBody DNCTabDomainName dncTabDomainName) {
     TDNService.saveOrUpdate(dncTabDomainName);
     return Result.success();
   }
+
   @GetMapping("search")
-  public Result search(@RequestParam String key){
-   List<DNCTabDomainName> res= TDNService.search(key);
-   return Result.success(res);
+  public Result search(@RequestParam String key) {
+    List<DNCTabDomainName> res = TDNService.search(key);
+    return Result.success(res);
   }
-
-
-
 }

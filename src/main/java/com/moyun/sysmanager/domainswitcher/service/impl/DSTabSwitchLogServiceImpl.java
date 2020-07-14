@@ -6,11 +6,7 @@ import com.moyun.sysmanager.domainswitcher.service.DSTabSwitchLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-/**
- * @author kuroneko
- */
+/** @author kuroneko */
 @Service
-public class DSTabSwitchLogServiceImpl extends ServiceImpl<DSTabSwitchLogMapper, DSTabSwitchLog> implements
-    DSTabSwitchLogService {
-
-}
+public class DSTabSwitchLogServiceImpl extends ServiceImpl<DSTabSwitchLogMapper, DSTabSwitchLog>
+    implements DSTabSwitchLogService {}

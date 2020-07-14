@@ -17,24 +17,16 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class DSTabDomainInUse implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id",type = IdType.AUTO)
-    private Long id;
-    /**
-     * 微信appid
-     */
-    private String wxAppid;
+  @TableId(value = "id", type = IdType.AUTO)
+  private Long id;
+  /** 微信appid */
+  private String wxAppid;
 
-    /**
-     * 服务类型id
-     */
-    private String wxName;
+  /** 服务类型id */
+  private String wxName;
 
-    /**
-     * 域名id
-     */
-    private Integer domainId;
-
-
+  /** 域名id */
+  private Integer domainId;
 }

@@ -15,5 +15,4 @@ public class SysmanagerApplication {
   public static void main(String[] args) {
     SpringApplication.run(SysmanagerApplication.class, args);
   }
-
 }

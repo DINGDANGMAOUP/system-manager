@@ -6,11 +6,7 @@ import com.moyun.sysmanager.domainswitcher.service.DSTabDomainService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-/**
- * @author kuroneko
- */
+/** @author kuroneko */
 @Service
-public class DSTabDomainServiceImpl extends ServiceImpl<DSTabDomainMapper, DSTabDomain> implements
-    DSTabDomainService {
-
-}
+public class DSTabDomainServiceImpl extends ServiceImpl<DSTabDomainMapper, DSTabDomain>
+    implements DSTabDomainService {}

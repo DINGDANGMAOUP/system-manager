@@ -18,12 +18,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class DSTabBlockedLog implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @TableId(value = "id",type = IdType.AUTO)
-    private Long id;
-    private String domain;
+  private static final long serialVersionUID = 1L;
 
-    private LocalDateTime blockTime;
+  @TableId(value = "id", type = IdType.AUTO)
+  private Long id;
 
+  private String domain;
 
+  private LocalDateTime blockTime;
 }

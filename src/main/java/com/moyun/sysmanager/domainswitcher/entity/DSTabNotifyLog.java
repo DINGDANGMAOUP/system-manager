@@ -19,19 +19,17 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class DSTabNotifyLog implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-            @TableId(value = "tid", type = IdType.AUTO)
-    private Integer tid;
+  @TableId(value = "tid", type = IdType.AUTO)
+  private Integer tid;
 
-        @TableField("domainName")
-    private String domainName;
+  @TableField("domainName")
+  private String domainName;
 
-        @TableField("notifyTime")
-    private LocalDateTime notifyTime;
+  @TableField("notifyTime")
+  private LocalDateTime notifyTime;
 
-        @TableField("managerId")
-    private Integer managerId;
-
-
+  @TableField("managerId")
+  private Integer managerId;
 }

@@ -17,18 +17,15 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class DSTabShortUrl implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @TableId(value = "id",type = IdType.AUTO)
-    private Long id;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 短网址代码
-     */
-    private String shortUrlCode;
+  @TableId(value = "id", type = IdType.AUTO)
+  private Long id;
 
-    private Integer domainId;
+  /** 短网址代码 */
+  private String shortUrlCode;
 
-    private String serviceLocation;
+  private Integer domainId;
 
-
+  private String serviceLocation;
 }
