@@ -1,5 +1,7 @@
 package com.moyun.sysmanager.domainswitcher.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +19,8 @@ public class DSTabServiceType implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(value = "id",type = IdType.AUTO)
+    private Long id;
     /**
      * 服务的类型：普通结果页链接，天降吉名结果页链接等
      */

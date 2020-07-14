@@ -18,34 +18,22 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class DSTabDomainName implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * 域名表ID
-     */
-            @TableId(value = "tid", type = IdType.UUID)
-    private Integer tid;
+  /** 域名表ID */
+  @TableId(value = "tid", type = IdType.UUID)
+  private Integer tid;
 
-    /**
-     * 域名或URL
-     */
-        @TableField("domainName")
-    private String domainName;
+  /** 域名或URL */
+  @TableField("domainName")
+  private String domainName;
 
-    /**
-     * 域名名称或对应的项目名
-     */
-    private String name;
+  /** 域名名称或对应的项目名 */
+  private String name;
 
-    /**
-     * 域名状态
-     */
-    private Integer state;
+  /** 域名状态 */
+  private Integer state;
 
-    /**
-     * 备注
-     */
-    private String remark;
-
-
+  /** 备注 */
+  private String remark;
 }

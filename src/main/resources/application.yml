@@ -2,15 +2,16 @@ server:
   port: 9876
 spring:
   datasource:
+    hikari:
+      idle-timeout: 600000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+
+      maximum-pool-size: 10
+      minimum-idle: 2
     dynamic:
-      hikari:
-        idle-timeout: 600000
-        connection-timeout: 30000
-        max-lifetime: 1800000
-        max-pool-size: 10
-        min-idle: 2
       primary: domainswitcher
-      strict: false
+#      strict: false
       datasource:
         domainswitcher:
           url: jdbc:mysql://localhost:3306/domainswitcher?useSSL=false&serverTimezone=UTC
