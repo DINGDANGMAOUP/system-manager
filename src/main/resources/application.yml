@@ -6,24 +6,22 @@ spring:
       idle-timeout: 600000
       connection-timeout: 30000
       max-lifetime: 1800000
-
       maximum-pool-size: 10
       minimum-idle: 2
     dynamic:
-      primary: domainswitcher
+      primary: DS
 #      strict: false
       datasource:
-        domainswitcher:
+        DS:
           url: jdbc:mysql://localhost:3306/domainswitcher?useSSL=false&serverTimezone=UTC
           username: root
           password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
-        domainnamechecker:
+        DNC:
           url: jdbc:mysql://localhost:3306/domainnamechecker?useSSL=false&serverTimezone=UTC
           username: root
           password: root
           driver-clss-name: com.mysql.cj.jdbc.Driver
-
   application:
     name: sysmanager-service
   jackson:
