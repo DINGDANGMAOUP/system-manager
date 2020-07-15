@@ -14,25 +14,43 @@ spring:
       datasource:
         DS:
           url: jdbc:mysql://localhost:3306/domainswitcher?useSSL=false&serverTimezone=UTC
+#          url: jdbc:p6spy:mysql://localhost:3306/domainswitcher?useSSL=false&serverTimezone=UTC
           username: root
           password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
+#          driver-class-name: com.p6spy.engine.spy.P6SpyDriver
         DNC:
           url: jdbc:mysql://localhost:3306/domainnamechecker?useSSL=false&serverTimezone=UTC
+#          url: jdbc:p6spy:mysql://localhost:3306/domainnamechecker?useSSL=false&serverTimezone=UTC
           username: root
           password: root
           driver-clss-name: com.mysql.cj.jdbc.Driver
+#          driver-clss-name: com.p6spy.engine.spy.P6SpyDriver
   application:
     name: sysmanager-service
   jackson:
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
     default-property-inclusion: non_null
+  thymeleaf:
+    cache: false
 #mybatis plus 设置
 mybatis-plus:
   type-aliases-package: com.moyun.sysmanager.domainnamechecker.entity,com.moyun.sysmanager.domainswitcher.entity
   mapper-locations: classpath:mapper/*/*.xml
   configuration:
     jdbc-type-for-null: null
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     # 关闭 mybatis-plus的 banner
     banner: false
+#logging:
+#  level:
+#    com:
+#      moyun:
+#        sysmanager:
+#          domainnamechecker:
+#            mapper:
+#              sqlserver: debug
+#          domainswitcher:
+#            mapper:
+#              sqlserver: debug

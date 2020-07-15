@@ -7,8 +7,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
-@EnableScheduling
-@EnableAsync
 @SpringBootApplication
 public class SysmanagerApplication {
 
