@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -158,7 +159,8 @@ public class SysWxController extends BaseController {
   /**
    * 切换正在使用的域名
    */
-  public Result cutover(){
+  public Result cutover(@RequestParam String oldDomain,@RequestParam String newDomain){
+
     return Result.success();
   }
 }
