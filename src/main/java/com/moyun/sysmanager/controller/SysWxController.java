@@ -18,6 +18,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.data.annotation.Transient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,7 +47,6 @@ public class SysWxController extends BaseController {
   @GetMapping
   @Transient
   public Result findAll() {
-    int count=0;
     ArrayList<Object> result = new ArrayList<>();
     // 取名
     WxModDto resUrl = WxModDto.resUrl();
@@ -58,7 +59,7 @@ public class SysWxController extends BaseController {
     // 测名
     WxModDto testUrl = WxModDto.testUrl();
 
-    // 获取一个正在使用的域名
+    // 获取所有正在使用的域名
     List<TabDomainInUse> useList = TDIService.list();
     for (TabDomainInUse dsTabDomainInUse : useList) {
       // 得到使用中 的域名 id
@@ -67,82 +68,74 @@ public class SysWxController extends BaseController {
       TabDomain Domain = TDService.getById(domainId);
       // 查询所属服务类
       TabServiceType ServiceType = TTService.getById(Domain.getServiceTypeId());
-      if (ServiceType.getServiceType().equals("resUrl")){
-        resUrl.getChildren().add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
-        System.out.println(count+"yes"+":"+"resUrl");
-        count++;
+      switch (ServiceType.getServiceType()) {
+        case "testUrl":
+          testUrl
+              .getChildren()
+              .add(new WxPubDto(Domain.getId(), Domain.getDomain(), Domain.getState(), true));
+          break;
+        case "resUrl":
+          resUrl
+              .getChildren()
+              .add(new WxPubDto(Domain.getId(), Domain.getDomain(), Domain.getState(), true));
+          break;
+        case "olqm":
+          olqm.getChildren()
+              .add(new WxPubDto(Domain.getId(), Domain.getDomain(), Domain.getState(), true));
+          break;
+        case "mstr":
+          mstr.getChildren()
+              .add(new WxPubDto(Domain.getId(), Domain.getDomain(), Domain.getState(), true));
+          break;
+        case "newOnlineMaster":
+          newOnlineMaster
+              .getChildren()
+              .add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
+          break;
       }
-      if (ServiceType.getServiceType().equals("olqm")){
-        olqm.getChildren().add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
-        System.out.println(count+"yes"+":"+"olqm");
-        count++;
-      }
-      if (ServiceType.getServiceType().equals("mstr")){
-        mstr.getChildren().add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
-        System.out.println(count+"yes"+":"+"mstr");
-        count++;
-      }
-      if (ServiceType.getServiceType().equals("newOnlineMaster")){
-        newOnlineMaster
-            .getChildren()
-            .add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
-        System.out.println(count+"yes"+":"+"newOnlineMaster");
-        count++;
-      }
-      if (ServiceType.getServiceType().equals("testUrl")){
-        testUrl.getChildren().add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
-        System.out.println(count+"yes"+":"+"testUrl");
-        count++;
-      }
-//      switch (ServiceType.getServiceType()) {
-//        case "resUrl":
-//          resUrl.getChildren().add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
-//          break;
-//        case "olqm":
-//          olqm.getChildren().add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
-//          break;
-//        case "mstr":
-//          mstr.getChildren().add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
-//          break;
-//        case "newOnlineMaster":
-//          newOnlineMaster
-//              .getChildren()
-//              .add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
-//          break;
-//        case "testUrl":
-//          testUrl.getChildren().add(new WxPubDto(1, Domain.getDomain(), Domain.getState(), true));
-//          break;
-//      }
     }
-//    /** 获取4个备用域名 */
-    //取名合并
-    List<TabDomain> ru = TDService.list(
-        Wrappers.<TabDomain>lambdaQuery().select().eq(TabDomain::getServiceTypeId, 1)
-            .last("limit 4"));
+    /** 获取4个备用域名 */
+    // 取名合并
+    List<TabDomain> ru =
+        TDService.list(
+            Wrappers.<TabDomain>lambdaQuery()
+                .select()
+                .eq(TabDomain::getServiceTypeId, 1)
+                .last("limit 4"));
     ru.forEach(tabDomain -> resUrl.getChildren().add(tabDomain));
-    //取名菜单合并
-    List<TabDomain> oq = TDService.list(
-        Wrappers.<TabDomain>lambdaQuery().select().eq(TabDomain::getServiceTypeId, 3)
-            .last("limit 4"));
+    // 取名菜单合并
+    List<TabDomain> oq =
+        TDService.list(
+            Wrappers.<TabDomain>lambdaQuery()
+                .select()
+                .eq(TabDomain::getServiceTypeId, 3)
+                .last("limit 4"));
     oq.forEach(tabDomain -> olqm.getChildren().add(tabDomain));
-    //大师菜单合并
-    List<TabDomain> mt = TDService.list(
-        Wrappers.<TabDomain>lambdaQuery().select().eq(TabDomain::getServiceTypeId, 4)
-            .last("limit 4"));
+    // 大师菜单合并
+    List<TabDomain> mt =
+        TDService.list(
+            Wrappers.<TabDomain>lambdaQuery()
+                .select()
+                .eq(TabDomain::getServiceTypeId, 4)
+                .last("limit 4"));
     mt.forEach(tabDomain -> mstr.getChildren().add(tabDomain));
-    //大师合并
-    List<TabDomain> nom = TDService.list(
-        Wrappers.<TabDomain>lambdaQuery().select().eq(TabDomain::getServiceTypeId, 5)
-            .last("limit 4"));
+    // 大师合并
+    List<TabDomain> nom =
+        TDService.list(
+            Wrappers.<TabDomain>lambdaQuery()
+                .select()
+                .eq(TabDomain::getServiceTypeId, 5)
+                .last("limit 4"));
     nom.forEach(tabDomain -> newOnlineMaster.getChildren().add(tabDomain));
-    //测名合并
-    List<TabDomain> tu = TDService.list(
-        Wrappers.<TabDomain>lambdaQuery().select().eq(TabDomain::getServiceTypeId, 6)
-            .last("limit 4"));
+    // 测名合并
+    List<TabDomain> tu =
+        TDService.list(
+            Wrappers.<TabDomain>lambdaQuery()
+                .select()
+                .eq(TabDomain::getServiceTypeId, 6)
+                .last("limit 4"));
     tu.forEach(tabDomain -> testUrl.getChildren().add(tabDomain));
-    /**
-     * 合并结果集
-     */
+    /** 合并结果集 */
     result.add(resUrl);
     result.add(olqm);
     result.add(mstr);
@@ -150,5 +143,22 @@ public class SysWxController extends BaseController {
     result.add(testUrl);
 
     return Result.success(result);
+  }
+
+  /**
+   * 更新或添加域名，也可启用或停止
+   * @param tabDomain
+   * @return
+   */
+  @PostMapping
+  public Result update(@RequestBody TabDomain tabDomain){
+    TDService.saveOrUpdate(tabDomain);
+  return Result.success();
+  }
+  /**
+   * 切换正在使用的域名
+   */
+  public Result cutover(){
+    return Result.success();
   }
 }

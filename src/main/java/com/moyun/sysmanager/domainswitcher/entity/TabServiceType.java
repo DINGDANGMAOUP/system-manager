@@ -20,7 +20,7 @@ public class TabServiceType implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @TableId(value = "id", type = IdType.AUTO)
-  private Long id;
+  private Integer id;
   /** 服务的类型：普通结果页链接，天降吉名结果页链接等 */
   private String serviceType;
 

@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 
-/**
- * @author dzh
- */
+/** @author dzh */
 @Data
 public class WxModDto {
   // 模块名
   private String serviceType;
   // 域名对象
   List children;
+
   public WxModDto(ModNameEnum modNameEnum) {
     this.serviceType = modNameEnum.getServiceType();
-    this.children=new ArrayList();
+    this.children = new ArrayList();
   }
 
   public static WxModDto of(ModNameEnum modNameEnum) {
@@ -41,6 +40,4 @@ public class WxModDto {
   public static WxModDto testUrl() {
     return new WxModDto(ModNameEnum.TESTURL);
   }
-
-
 }
