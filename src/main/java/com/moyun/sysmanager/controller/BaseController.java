@@ -13,4 +13,5 @@ public class BaseController {
     rspData.put("total", pageInfo.getTotal());
     return rspData;
   }
+
 }

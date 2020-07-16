@@ -13,6 +13,7 @@ import com.moyun.sysmanager.domainswitcher.service.TabDomainService;
 import com.moyun.sysmanager.domainswitcher.service.TabServiceTypeService;
 import com.moyun.sysmanager.domainswitcher.service.TabShortUrlService;
 import com.moyun.sysmanager.domainswitcher.service.TabSwitchLogService;
+import com.moyun.sysmanager.restemplate.RestTemplateUtils;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
@@ -39,6 +40,7 @@ public class SysWxController extends BaseController {
   @Resource TabSwitchLogService TSLService;
   // 域名表
   @Resource TabDomainService TDService;
+
 
   /**
    * 获取取名模块数据
@@ -159,7 +161,18 @@ public class SysWxController extends BaseController {
   /**
    * 切换正在使用的域名
    */
+  @Transient
   public Result cutover(@RequestParam String oldDomain,@RequestParam String newDomain){
+    //正在使用的域名
+    TabDomain oldDm = TDService
+        .getOne(Wrappers.<TabDomain>lambdaQuery().select().eq(TabDomain::getDomain, oldDomain));
+    //备用域名
+    TabDomain newDm = TDService
+        .getOne(Wrappers.<TabDomain>lambdaQuery().select().eq(TabDomain::getDomain, newDomain));
+
+    //切换
+    TDIService.update(Wrappers.<TabDomainInUse>lambdaUpdate().set(TabDomainInUse::getDomainId,newDm.getId()).eq(TabDomainInUse::getDomainId,oldDm.getId()));
+
 
     return Result.success();
   }

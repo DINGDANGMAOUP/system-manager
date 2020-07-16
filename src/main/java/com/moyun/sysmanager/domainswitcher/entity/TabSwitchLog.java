@@ -29,5 +29,8 @@ public class TabSwitchLog implements Serializable {
 
   private LocalDateTime switchTime;
 
+  /**
+   * 1:success,0:failure
+   */
   private Integer switchResult;
 }
