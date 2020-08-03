@@ -1,0 +1,56 @@
+server:
+  port: 9876
+spring:
+  devtools:
+    restart:
+      enabled: true
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/WEB-INF/resources/,file:static/
+  datasource:
+    hikari:
+      idle-timeout: 600000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 2
+    dynamic:
+      primary: DS
+      datasource:
+        DS:
+          url: jdbc:mysql://localhost:3306/domainswitcher?useSSL=false&serverTimezone=UTC
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        DNC:
+          url: jdbc:mysql://localhost:3306/domainnamechecker?useSSL=false&serverTimezone=UTC
+          username: root
+          password: root
+          driver-clss-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: sysmanager-service
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    default-property-inclusion: non_null
+  thymeleaf:
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+    #严格执行H5标准
+    mode: LEGACYHTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+#mybatis plus 设置
+mybatis-plus:
+  type-aliases-package: com.moyun.sysmanager.domainnamechecker.entity,com.moyun.sysmanager.domainswitcher.entity,com.moyun.sysmanager.domainnamechecker.web.entity
+  mapper-locations: classpath:mapper/*/*.xml
+  configuration:
+    jdbc-type-for-null: null
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    # 关闭 mybatis-plus的 banner
+    banner: false
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moyun.sysmanager.domainnamechecker.mapper.TabNotifyLogMapper">
+
+  <select id="findByNotifyAndManager"
+    resultType="com.moyun.sysmanager.common.pojo.NotifyAndManagerDto">
+    SELECT tab_notify_log.tid,tab_notify_log.domainName,tab_notify_log.notifyTime,tab_manager.`name`,tab_manager.phone,tab_manager.remark,tab_manager.state FROM tab_notify_log LEFT JOIN tab_manager ON tab_notify_log.managerId=tab_manager.tid
+  </select>
+</mapper>

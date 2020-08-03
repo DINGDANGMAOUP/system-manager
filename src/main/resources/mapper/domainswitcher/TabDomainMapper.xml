@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moyun.sysmanager.domainswitcher.mapper.TabDomainMapper">
+
+  <select id="findBySpare" resultType="com.moyun.sysmanager.common.pojo.UsingDomain">
+    select tab_domain.id,tab_domain.domain,tab_domain.state,tab_domain.service_type_id from tab_domain where tab_domain.service_type_id=#{serviceTypeId} and tab_domain.id not in(#{usingServiceTypeId})
+  </select>
+  <select id="findByUsingId" resultType="com.moyun.sysmanager.common.pojo.UsingIdDto">
+    select tab_domain_in_use.id from tab_domain_in_use left join tab_domain td on tab_domain_in_use.domain_id = td.id where service_type_id=#{serviceTypeId}
+    </select>
+</mapper>
