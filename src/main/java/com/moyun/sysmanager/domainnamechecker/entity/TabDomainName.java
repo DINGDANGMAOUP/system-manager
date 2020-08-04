@@ -31,15 +31,18 @@ public class TabDomainName implements Serializable {
   private Integer tid;
 
   /** 域名或URL */
+  @NotBlank
   @Pattern(
       regexp =
           "^(?=^.{3,255}$)(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\\d+)*(\\/\\w+\\.\\w+)*$",message = "请输入正确的域名")
   @TableField("`domainName`")
   private String domainName;
 
+  @NotBlank
   /** 域名名称或对应的项目名 */
   private String name;
 
+  @NotNull
   /** 域名状态 */
   private Integer state;
 

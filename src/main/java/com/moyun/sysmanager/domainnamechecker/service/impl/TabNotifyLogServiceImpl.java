@@ -19,8 +19,8 @@ public class TabNotifyLogServiceImpl extends ServiceImpl<TabNotifyLogMapper, Tab
   TabNotifyLogMapper tabNotifyLogMapper;
 
   @Override
-  public List<NotifyAndManagerDto> findByNotifyAndManager() {
-    List<NotifyAndManagerDto> list=  tabNotifyLogMapper.findByNotifyAndManager();
+  public List<NotifyAndManagerDto> findByNotifyAndManager(String domainName) {
+    List<NotifyAndManagerDto> list=  tabNotifyLogMapper.findByNotifyAndManager(domainName);
     return list;
   }
 }

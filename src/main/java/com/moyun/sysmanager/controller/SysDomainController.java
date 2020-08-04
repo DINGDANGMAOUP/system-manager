@@ -46,15 +46,10 @@ public class SysDomainController extends BaseController {
   @GetMapping("list")
   public VueResult findAll( String domainName) {
     String trim = domainName.trim();
-    List<TabDomainName> list = null;
-    if (trim != null) {
-      list =
-          TDNService.list(
-              Wrappers.<TabDomainName>lambdaQuery().like(TabDomainName::getDomainName, trim));
+    List<TabDomainName> list =
+        TDNService.list(
+            Wrappers.<TabDomainName>lambdaQuery().like(TabDomainName::getDomainName, trim));
 
-    } else {
-      list = TDNService.list();
-    }
     return VueResult.success(list);
   }
 
@@ -92,7 +87,6 @@ public class SysDomainController extends BaseController {
   @ResponseBody
   @PostMapping("/add")
   public VueResult add(@RequestBody @Valid TabDomainName tabDomainName) {
-
     TDNService.save(tabDomainName);
     return VueResult.success();
   }

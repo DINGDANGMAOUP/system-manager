@@ -8,5 +8,5 @@ import java.util.List;
 /** @author kuroneko */
 public interface TabNotifyLogService extends IService<TabNotifyLog> {
 
-  List<NotifyAndManagerDto> findByNotifyAndManager();
+  List<NotifyAndManagerDto> findByNotifyAndManager(String domainName);
 }

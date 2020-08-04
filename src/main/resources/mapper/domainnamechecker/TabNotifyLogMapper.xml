@@ -4,6 +4,10 @@
 
   <select id="findByNotifyAndManager"
     resultType="com.moyun.sysmanager.common.pojo.NotifyAndManagerDto">
-    SELECT tab_notify_log.tid,tab_notify_log.domainName,tab_notify_log.notifyTime,tab_manager.`name`,tab_manager.phone,tab_manager.remark,tab_manager.state FROM tab_notify_log LEFT JOIN tab_manager ON tab_notify_log.managerId=tab_manager.tid
+    SELECT tab_notify_log.tid,tab_notify_log.domainName,tab_notify_log.notifyTime,tab_manager.`name`,tab_manager.phone,tab_manager.remark,tab_manager.state FROM tab_notify_log LEFT JOIN tab_manager ON tab_notify_log.managerId=tab_manager.tid 
+    where 1=1
+    <if test="domainName != null and domainName != ''">
+      AND tab_notify_log.domainName like  '%${domainName}%'
+    </if>
   </select>
 </mapper>

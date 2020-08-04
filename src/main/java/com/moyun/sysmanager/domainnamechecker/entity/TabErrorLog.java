@@ -27,6 +27,7 @@ public class TabErrorLog implements Serializable {
   @TableId(value = "tid", type = IdType.AUTO)
   private Integer tid;
 
+
   /** 异常的域名或URL */
   @TableField("domainName")
   private String domainName;

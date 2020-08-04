@@ -8,5 +8,5 @@ import java.util.List;
 /** @author kuroneko */
 public interface TabNotifyLogMapper extends BaseMapper<TabNotifyLog> {
 
-  List<NotifyAndManagerDto> findByNotifyAndManager();
+  List<NotifyAndManagerDto> findByNotifyAndManager(String domainName);
 }

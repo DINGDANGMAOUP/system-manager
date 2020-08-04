@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moyun.sysmanager.domainswitcher.mapper.TabSwitchLogMapper">
 
+    <select id="findByAll" resultType="com.moyun.sysmanager.domainswitcher.entity.TabSwitchLog">
+        select  * from tab_switch_log where 1=1
+        <if test="domain != null and domain != ''">
+            AND tab_switch_log.origin_domain like  '%${domain}%' or tab_switch_log.new_domain like  '%${domain}%'
+        </if>
+        order by  tab_switch_log.switch_time desc
+    </select>
 </mapper>

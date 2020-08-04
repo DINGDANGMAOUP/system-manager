@@ -29,8 +29,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("SysLog")
 public class SysLogController extends BaseController {
-  private static final String SUCCESS = "成功";
-  private static final String FAILURE = "失败";
 
   /** SysDomain */
 
@@ -44,8 +42,6 @@ public class SysLogController extends BaseController {
   // 被屏蔽的域名记录
   @Resource TabBlockedLogService TBLService;
   @Resource
-  TabNotifyLogService tabNotifyLogService;
-  @Resource
   SysLogService sysLogService;
 
   /** 屏蔽日志 */
@@ -53,51 +49,42 @@ public class SysLogController extends BaseController {
   @Transient
   public VueResult findByBlock(String domain) {
     String trim = domain.trim();
-    List<TabBlockedLog> list =null;
-    if (trim != null) {
-      list =
-          TBLService.list(
-              Wrappers.<TabBlockedLog>lambdaQuery().like(TabBlockedLog::getDomain, trim).orderByDesc(TabBlockedLog::getBlockTime));
-    } else {
-
-      list = TBLService.list(Wrappers.<TabBlockedLog>lambdaQuery().orderByDesc(TabBlockedLog::getBlockTime));
-    }
+    List<TabBlockedLog> list =
+        TBLService.list(
+            Wrappers.<TabBlockedLog>lambdaQuery().like(TabBlockedLog::getDomain, trim).orderByDesc(TabBlockedLog::getBlockTime));
 
     return VueResult.success(list);
   }
   @GetMapping("err")
   @Transient
-  public VueResult findByErr(String domain) {
-    String trim = domain.trim();
-    List<TabErrorLog> list =null;
-    if (trim!=null){
-      list=tabErrorLogService.list(Wrappers.<TabErrorLog>lambdaQuery().like(TabErrorLog::getDomainName,domain).orderByDesc(TabErrorLog::getErrorTime));
-    }else {
-
-      list = tabErrorLogService.list(Wrappers.<TabErrorLog>lambdaQuery().orderByDesc(TabErrorLog::getErrorTime));
-    }
+  public VueResult findByErr(String domainName) {
+    String trim = domainName.trim();
+    List<TabErrorLog> list=tabErrorLogService.list(Wrappers.<TabErrorLog>lambdaQuery().like(TabErrorLog::getDomainName,trim).orderByDesc(TabErrorLog::getErrorTime));
 
     return VueResult.success(list);
   }
   @GetMapping("switch")
   @Transient
-  public VueResult findBySwitch(String oldDomain,String newDomain) {
-    List<TabSwitchLog> list = TSLService.list();
+  public VueResult findBySwitch(String domain) {
+    List<TabSwitchLog> list = TSLService.findByAll(domain);
 
     return VueResult.success(list);
   }
   @GetMapping("notify")
   @Transient
-  public VueResult findByNotify() {
-    List<NotifyAndManagerDto> list = TNLService.findByNotifyAndManager();
+  public VueResult findByNotify(String domainName) {
+    String trim = domainName.trim();
+    List<NotifyAndManagerDto> list = TNLService.findByNotifyAndManager(trim);
 
     return VueResult.success(list);
   }
 
   @GetMapping("operationLog")
   @Transient
-  public VueResult findBySysLog() {
-    List<SysLog> list = sysLogService.list(Wrappers.<SysLog>lambdaQuery().orderByDesc(SysLog::getCreateTime));
+  public VueResult findBySysLog(String username) {
+    String trim = username.trim();
+    List<SysLog> list=sysLogService.list(Wrappers.<SysLog>lambdaQuery().like(SysLog::getUsername,trim).orderByDesc(SysLog::getCreateTime));
+
 
     return VueResult.success(list);
   }

@@ -82,7 +82,7 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
   @PostMapping("/enable")
   @Transient
   public VueResult enable(@RequestBody UsingDomain usingDomain) {
-    System.out.println("======================================================");
+
     TabDomain tabDomain = new TabDomain();
     tabDomain.setId(usingDomain.getId());
     tabDomain.setState(1);
@@ -117,7 +117,6 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
     TabDomain tabDomain = new TabDomain();
     tabDomain.setId(usingDomain.getId());
     tabDomain.setState(1);
-    System.out.println();
     if (serviceTypeId==1||serviceTypeId==5||serviceTypeId==6){
       RestemplateDto forObject = restTemplate.getForObject(WXURLRE, RestemplateDto.class);
       HttpHeaders headers = new HttpHeaders();
@@ -147,8 +146,6 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
   @ResponseBody
   @Transactional
   public VueResult createTab(@RequestBody @Valid UsingDomain usingDomain) throws CustmerException {
-    //    model.addAttribute("")
-
     try {
       TabDomain tabDomain = new TabDomain();
       tabDomain.setState(usingDomain.getState());
