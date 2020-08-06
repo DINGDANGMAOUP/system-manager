@@ -2,8 +2,10 @@ package com.moyun.sysmanager.common.pojo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class DomainInUsDto {
+public class DomainInUsDto  implements Serializable {
 
   private Integer id;
   /** 微信appid */

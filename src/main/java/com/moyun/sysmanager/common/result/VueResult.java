@@ -1,9 +1,15 @@
 package com.moyun.sysmanager.common.result;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 @Data
+@Accessors(chain = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@NoArgsConstructor
 public class VueResult<T> implements Serializable {
     private Integer code;
     private String message;

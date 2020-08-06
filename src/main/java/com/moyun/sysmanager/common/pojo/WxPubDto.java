@@ -3,9 +3,11 @@ package com.moyun.sysmanager.common.pojo;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.io.Serializable;
+
 /** 微信公众号监控pojo */
 @Data
-public class WxPubDto {
+public class WxPubDto  implements Serializable {
   // 序号
   private Integer id;
   // 域名

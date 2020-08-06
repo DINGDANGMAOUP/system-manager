@@ -19,12 +19,12 @@ spring:
       primary: DS
       datasource:
         DS:
-          url: jdbc:mysql://localhost:3399/domainswitcher?useSSL=false&serverTimezone=UTC
+          url: jdbc:mysql://localhost:3399/domainswitcher?useSSL=false&serverTimezone=GMT%2B8&
           username: domain_dzh
           password: dzh123456
           driver-class-name: com.mysql.cj.jdbc.Driver
         DNC:
-          url: jdbc:mysql://localhost:3399/domain_name_checker?useSSL=false&serverTimezone=UTC
+          url: jdbc:mysql://localhost:3399/domain_name_checker?useSSL=false&serverTimezone=GMT%2B8&
           username: domain_dzh
           password: dzh123456
           driver-clss-name: com.mysql.cj.jdbc.Driver

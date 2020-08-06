@@ -1,6 +1,7 @@
 package com.moyun.sysmanager.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.moyun.sysmanager.common.annotation.Log;
 import com.moyun.sysmanager.common.pojo.NotifyDto;
 import com.moyun.sysmanager.common.result.Result;
 import com.moyun.sysmanager.common.result.VueResult;
@@ -31,12 +32,15 @@ public class SysNotifyController {
    * @param tabManager
    * @return
    */
+  @Log("新增或更新管理员")
   @PostMapping("update")
   public VueResult upDateByManager(@RequestBody TabManager tabManager) {
     TMService.saveOrUpdate(tabManager);
     return VueResult.success(tabManager.getTid());
   }
 
+
+  @Log("删除管理员")
   @DeleteMapping("remove")
   public VueResult deleteByManager(@RequestBody TabManager tabManager) {
     TMService.removeById(tabManager);

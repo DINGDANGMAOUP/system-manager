@@ -81,7 +81,6 @@ public class LogAspect {
         sysLog.setIp(IPUtil.getIpAddr(request));
         // 模拟一个用户名
         String token = HttpContextUtil.getHttpServletRequest().getHeader("Authorization");
-        System.out.println(token);
         String username = "";
         if (StringUtils.isNotBlank(token)) {
             username = JWTUtil.getUsername(token);
