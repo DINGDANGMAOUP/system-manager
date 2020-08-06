@@ -38,6 +38,7 @@ public class AuthController {
                 .eq(Admin::getUsername, admin.getUsername())
                 .eq(Admin::getPassword, admin.getPassword()));
     if (ObjectUtils.isEmpty(res)){
+        log.info("登入失败");
       return VueResult.fail("用户不存在");
     }
     String Token = JWTUtil.sign(admin.getUsername(), admin.getPassword());
