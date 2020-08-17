@@ -5,24 +5,10 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.moyun.sysmanager.common.annotation.Log;
 import com.moyun.sysmanager.common.pojo.*;
 import com.moyun.sysmanager.common.result.Result;
-import com.moyun.sysmanager.common.result.ViewResult;
-import com.moyun.sysmanager.common.result.VueEnum;
 import com.moyun.sysmanager.common.result.VueResult;
 import com.moyun.sysmanager.domainswitcher.entity.TabDomain;
 import com.moyun.sysmanager.domainswitcher.entity.TabDomainInUse;
-import com.moyun.sysmanager.domainswitcher.entity.TabServiceType;
-import com.moyun.sysmanager.domainswitcher.service.TabBlockedLogService;
-import com.moyun.sysmanager.domainswitcher.service.TabDomainInUseService;
-import com.moyun.sysmanager.domainswitcher.service.TabDomainService;
-import com.moyun.sysmanager.domainswitcher.service.TabServiceTypeService;
-import com.moyun.sysmanager.domainswitcher.service.TabShortUrlService;
-import com.moyun.sysmanager.domainswitcher.service.TabSwitchLogService;
-import java.beans.Transient;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Resource;
-import javax.validation.Valid;
-
+import com.moyun.sysmanager.domainswitcher.service.*;
 import com.moyun.sysmanager.exception.CustmerException;
 import com.moyun.sysmanager.utils.ObjToMap;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +24,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.beans.Transient;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -108,6 +100,10 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
   @PostMapping("/switch")
   @Transient
   public VueResult BySwitch(@RequestBody UsingDomain usingDomain) {
+    String url1="http://27.159.82.162:10135/dws/domain/createWxShortUrl?url="+usingDomain.getDomain();
+    String url2=url1+"/qm/pay.php";
+    ShortUrlDto shortUrlDto1 = restTemplate.getForObject(url1, ShortUrlDto.class);
+    ShortUrlDto shortUrlDto2 = restTemplate.getForObject(url2, ShortUrlDto.class);
     Integer serviceTypeId = usingDomain.getServiceTypeId();
     UsingIdDto usingIdDto = TDService.findByUsingId(serviceTypeId);
     TabDomainInUse inUse = new TabDomainInUse();
@@ -117,6 +113,8 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
     TabDomain tabDomain = new TabDomain();
     tabDomain.setId(usingDomain.getId());
     tabDomain.setState(1);
+    tabDomain.setWxShortUrl(shortUrlDto1.getShortUrl());
+    tabDomain.setWxShortUrlTwo(shortUrlDto2.getShortUrl());
     if (serviceTypeId==1||serviceTypeId==5||serviceTypeId==6){
       RestemplateDto forObject = restTemplate.getForObject(WXURLRE, RestemplateDto.class);
       HttpHeaders headers = new HttpHeaders();
@@ -141,7 +139,7 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
     return VueResult.success();
   }
   @RequiresAuthentication
-  @Log("域名高可用：新增域名")
+  @Log("微信高可用：新增域名")
   @PostMapping("/create")
   @ResponseBody
   @Transactional
