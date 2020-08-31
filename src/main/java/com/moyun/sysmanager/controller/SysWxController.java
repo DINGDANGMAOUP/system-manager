@@ -42,16 +42,8 @@ public class SysWxController extends BaseController {
   private static final String WXURLUP = "http://mdk.ufuns.cn/wxserver/wx/domain/update";
   //  private static final String WXURLUPBAK = "http://my9f.top/shortLink/updateDomainName";
   private static final String WXURLUPBAK = "http://mdk.ufuns.cn/shortLink/updateDomainName";
-  // 被屏蔽的域名记录
-  @Resource TabBlockedLogService TBLService;
   // 使用中的域名表
   @Resource TabDomainInUseService TDIService;
-  // 服务类型
-  @Resource TabServiceTypeService TTService;
-  // 短网址表
-  @Resource TabShortUrlService TSUService;
-  // 域名替换记录
-  @Resource TabSwitchLogService TSLService;
   // 域名表
   @Resource TabDomainService TDService;
   @Autowired

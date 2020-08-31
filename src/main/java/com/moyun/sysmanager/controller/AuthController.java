@@ -56,7 +56,7 @@ public class AuthController {
     Admin one = adminService.getOne(Wrappers.<Admin>lambdaQuery().eq(Admin::getUsername, username));
     AdDto adDto = new AdDto();
     ArrayList<Object> list = new ArrayList<>();
-    list.add("admin");
+    list.add(one.getRole());
     adDto.setId(one.getId());
     adDto.setPermission(one.getPermission());
     adDto.setRoles(list);

@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
-public class VueResult<T> implements Serializable {
+public class  VueResult<T> implements Serializable {
     private Integer code;
     private String message;
     private T data;

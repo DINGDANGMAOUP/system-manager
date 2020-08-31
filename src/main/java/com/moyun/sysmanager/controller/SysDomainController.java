@@ -31,12 +31,6 @@ import org.springframework.web.bind.annotation.*;
 public class SysDomainController extends BaseController {
   // 域名
   @Resource TabDomainNameService TDNService;
-  // 域名异常记录
-  @Resource TabErrorLogService TELService;
-  // 管理员
-  @Resource TabNotifyLogService TNLService;
-  // 异常通知
-  @Resource TabManagerService TMService;
 
   /**
    * 获取域名高可用列表

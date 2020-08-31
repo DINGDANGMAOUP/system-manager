@@ -3,7 +3,7 @@
 <configuration>
     <!--定义日志文件的存储地址,使用绝对路径-->
     <!--本地日志地址-->
-     <property name="LOG_HOME" value="D:/www/gky.ufuns.cn/logs"/>
+     <property name="LOG_HOME" value="D:/www/ha.quming.online/logs"/>
     <!--测试日志地址-->
 <!--    <property name="LOG_HOME" value="D:/WWW/dictapi.quming.tech/qiyenameLogs/qiyenameLog"/>-->
     <!--正式日志地址-->
