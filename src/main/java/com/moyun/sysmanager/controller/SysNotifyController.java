@@ -32,7 +32,7 @@ public class SysNotifyController {
    * @param tabManager
    * @return
    */
-  @Log("新增或更新管理员")
+  @Log("新增或更新短信通知员")
   @PostMapping("update")
   public VueResult upDateByManager(@RequestBody TabManager tabManager) {
     TMService.saveOrUpdate(tabManager);
@@ -40,7 +40,7 @@ public class SysNotifyController {
   }
 
 
-  @Log("删除管理员")
+  @Log("删除短信通知员")
   @DeleteMapping("remove")
   public VueResult deleteByManager(@RequestBody TabManager tabManager) {
     TMService.removeById(tabManager);
