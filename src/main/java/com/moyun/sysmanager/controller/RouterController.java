@@ -1,15 +1,13 @@
-package com.moyun.sysmanager.domainswitcher.controller;
-
+package com.moyun.sysmanager.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author kuroneko
+ * @author dzh
  */
 @RestController
-@RequestMapping("sysWx/tdn")
-public class DSTabDomainNameController {
+@RequestMapping("router")
+public class RouterController {
 
 }
