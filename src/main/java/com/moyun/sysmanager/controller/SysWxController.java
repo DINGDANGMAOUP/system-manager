@@ -101,7 +101,6 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
     TabDomainInUse inUse = new TabDomainInUse();
     inUse.setId(usingIdDto.getId());
     inUse.setDomainId(usingDomain.getId());
-
     TabDomain tabDomain = new TabDomain();
     tabDomain.setId(usingDomain.getId());
     tabDomain.setState(1);
@@ -137,10 +136,16 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
   @Transactional
   public VueResult createTab(@RequestBody @Valid UsingDomain usingDomain) throws CustmerException {
     try {
+      String url1="http://27.159.82.162:10135/dws/domain/createWxShortUrl?url="+usingDomain.getDomain();
+      String url2=url1+"/qm/pay.php";
+      ShortUrlDto shortUrlDto1 = restTemplate.getForObject(url1, ShortUrlDto.class);
+      ShortUrlDto shortUrlDto2 = restTemplate.getForObject(url2, ShortUrlDto.class);
       TabDomain tabDomain = new TabDomain();
       tabDomain.setState(usingDomain.getState());
       tabDomain.setDomain(usingDomain.getDomain());
       tabDomain.setServiceTypeId(usingDomain.getServiceTypeId());
+      tabDomain.setWxShortUrl(shortUrlDto1.getShortUrl());
+      tabDomain.setWxShortUrlTwo(shortUrlDto2.getShortUrl());
       TDService.save(tabDomain);
       if (usingDomain.isUsing()) {
         UsingIdDto usingId = TDService.findByUsingId(usingDomain.getServiceTypeId());
