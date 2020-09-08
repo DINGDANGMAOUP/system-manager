@@ -92,10 +92,10 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
   @PostMapping("/switch")
   @Transient
   public VueResult BySwitch(@RequestBody UsingDomain usingDomain) {
-    String url1="http://27.159.82.162:10135/dws/domain/createWxShortUrl?url="+usingDomain.getDomain();
-    String url2=url1+"/qm/pay.php";
-    ShortUrlDto shortUrlDto1 = restTemplate.getForObject(url1, ShortUrlDto.class);
-    ShortUrlDto shortUrlDto2 = restTemplate.getForObject(url2, ShortUrlDto.class);
+//    String url1="http://27.159.82.162:10135/dws/domain/createWxShortUrl?url="+usingDomain.getDomain();
+//    String url2=url1+"/qm/pay.php";
+//    ShortUrlDto shortUrlDto1 = restTemplate.getForObject(url1, ShortUrlDto.class);
+//    ShortUrlDto shortUrlDto2 = restTemplate.getForObject(url2, ShortUrlDto.class);
     Integer serviceTypeId = usingDomain.getServiceTypeId();
     UsingIdDto usingIdDto = TDService.findByUsingId(serviceTypeId);
     TabDomainInUse inUse = new TabDomainInUse();
@@ -104,8 +104,8 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
     TabDomain tabDomain = new TabDomain();
     tabDomain.setId(usingDomain.getId());
     tabDomain.setState(1);
-    tabDomain.setWxShortUrl(shortUrlDto1.getShortUrl());
-    tabDomain.setWxShortUrlTwo(shortUrlDto2.getShortUrl());
+//    tabDomain.setWxShortUrl(shortUrlDto1.getShortUrl());
+//    tabDomain.setWxShortUrlTwo(shortUrlDto2.getShortUrl());
     if (serviceTypeId==1||serviceTypeId==5||serviceTypeId==6){
       RestemplateDto forObject = restTemplate.getForObject(WXURLRE, RestemplateDto.class);
       HttpHeaders headers = new HttpHeaders();
@@ -137,15 +137,16 @@ public VueResult findAll(@RequestParam(value = "serviceTypeId", defaultValue = "
   public VueResult createTab(@RequestBody @Valid UsingDomain usingDomain) throws CustmerException {
     try {
       String url1="http://27.159.82.162:10135/dws/domain/createWxShortUrl?url="+usingDomain.getDomain();
-      String url2=url1+"/qm/pay.php";
-      ShortUrlDto shortUrlDto1 = restTemplate.getForObject(url1, ShortUrlDto.class);
-      ShortUrlDto shortUrlDto2 = restTemplate.getForObject(url2, ShortUrlDto.class);
+      String url2="http://ha.quming.online/dws/domain/createWxShortUrl?url="+usingDomain.getDomain();
+      ShortUrlDto shortUrlDto = restTemplate.getForObject(url2, ShortUrlDto.class);
+      if (shortUrlDto.getShortUrl().equals(null)){
+      shortUrlDto=restTemplate.getForObject(url1, ShortUrlDto.class);
+      }
       TabDomain tabDomain = new TabDomain();
       tabDomain.setState(usingDomain.getState());
       tabDomain.setDomain(usingDomain.getDomain());
       tabDomain.setServiceTypeId(usingDomain.getServiceTypeId());
-      tabDomain.setWxShortUrl(shortUrlDto1.getShortUrl());
-      tabDomain.setWxShortUrlTwo(shortUrlDto2.getShortUrl());
+      tabDomain.setWxShortUrl(shortUrlDto.getShortUrl());
       TDService.save(tabDomain);
       if (usingDomain.isUsing()) {
         UsingIdDto usingId = TDService.findByUsingId(usingDomain.getServiceTypeId());

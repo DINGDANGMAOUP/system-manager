@@ -1,7 +1,10 @@
 package com.moyun.sysmanager.common.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,42 +12,30 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Accessors(chain = true)
 public class Tree<T> {
 
   private String id;
-
-  private String key;
-
-  private String icon;
-
-  private String title;
-
-  private String value;
-
-  private String text;
-
-  private String permission;
-
-  private String type;
-
-  private Double order;
 
   private String path;
 
   private String component;
 
+  private String name;
+
+  private String metaId;
+
+  private Integer hidden;
+
+  private String redirect;
+
+  @TableField("`always_show`")
+  private Integer alwaysShow;
+
+  private Integer parentId;
+
   private List<Tree<T>> children;
 
-  private String parentId;
-
-  private boolean hasParent = false;
-
-  private boolean hasChildren = false;
-
-  private Date createdAt;
-
-  private Date updatedAt;
-  private Integer group;
 
   public void initChildren() {
     this.children = new ArrayList<>();
