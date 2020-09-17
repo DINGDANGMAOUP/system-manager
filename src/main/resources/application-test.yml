@@ -19,14 +19,14 @@ spring:
       primary: DS
       datasource:
         DS:
-          url: jdbc:mysql://192.168.143.203:3306/domainswitcher?serverTimezone=GMT%2B8
-          username: debian-sys-maint
-          password: Dzh19970102.
+          url: jdbc:mysql://localhost:3399/domainswitcher?useSSL=false&serverTimezone=GMT%2B8&
+          username: domain_dzh
+          password: dzh123456
           driver-class-name: com.mysql.cj.jdbc.Driver
         DNC:
-          url: jdbc:mysql://192.168.143.203:3306/domainnamechecker?serverTimezone=GMT%2B8
-          username: debian-sys-maint
-          password: Dzh19970102.
+          url: jdbc:mysql://localhost:3399/domain_name_checker?useSSL=false&serverTimezone=GMT%2B8&
+          username: domain_dzh
+          password: dzh123456
           driver-clss-name: com.mysql.cj.jdbc.Driver
   application:
     name: sysmanager-service

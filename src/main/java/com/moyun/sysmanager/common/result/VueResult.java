@@ -47,6 +47,14 @@ public class  VueResult<T> implements Serializable {
         return new VueResult<>(VueEnum.SUCCESS, data);
     }
 
+    public static VueResult orderNull() {
+        return new VueResult<>(VueEnum.ORDERID_NULL);
+    }
+
+    public static <T> VueResult orderNull(T data) {
+        return new VueResult<>(VueEnum.ORDERID_NULL, data);
+    }
+
     public static VueResult fail() {
         return new VueResult<>(VueEnum.SERVER_ERROR);
     }

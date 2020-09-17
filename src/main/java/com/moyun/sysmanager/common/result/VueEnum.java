@@ -7,9 +7,11 @@ public enum VueEnum {
     BAD_REQUEST(40000, "bad_request"),
     UNAUTHORIZED(40001, "unauthorized"),
     NOT_FOUND(40004, "not_found"),
-    WRONG_PASSWORD(50001,"wrong_password"),
-    UNKNOWN(60000,"unknown"),
-    ENABLE_FAILURE(80001,"enable_failure");
+    WRONG_PASSWORD(50001, "wrong_password"),
+    UNKNOWN(60000, "unknown"),
+    ENABLE_FAILURE(80001, "enable_failure"),
+    ORDERID_NULL(80002, "请输入正确的订单号"),
+    REFUND_FAIL(80003, "退款失败");
     private int code;
     private String desc;
 

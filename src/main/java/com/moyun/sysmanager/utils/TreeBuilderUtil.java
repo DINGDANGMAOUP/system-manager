@@ -22,16 +22,16 @@ public class TreeBuilderUtil {
                   /// TODO: 2020/9/8 构建树
                   ArrayList<Tree> child = new ArrayList<>();
                   trees.add(
-                      new Tree()
-                          .setId(routers.getId())
-                          .setPath(routers.getPath())
-                          .setComponent(routers.getComponent())
-                          .setName(routers.getName())
-                          .setMetaId(routers.getMetaId())
-                          .setHidden(routers.getHidden())
-                          .setRedirect(routers.getRedirect())
-                          .setAlwaysShow(routers.getAlwaysShow())
-                          .setChildren());
+                          new Tree()
+                                  .setId(routers.getId())
+                                  .setPath(routers.getPath())
+                                  .setComponent(routers.getComponent())
+                                  .setName(routers.getName())
+                                  .setMetaId(routers.getMetaId())
+                                  .setHidden(routers.getHidden())
+                                  .setRedirect(routers.getRedirect())
+                                  .setAlwaysShow(routers.getAlwaysShow())
+                                  .setChildren(null));
                 }
               });
         });

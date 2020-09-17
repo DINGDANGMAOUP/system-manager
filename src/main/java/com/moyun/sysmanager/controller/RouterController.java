@@ -1,6 +1,5 @@
 package com.moyun.sysmanager.controller;
 
-import com.alibaba.fastjson.support.odps.udf.CodecCheck;
 import com.moyun.sysmanager.common.pojo.RoleDto;
 import com.moyun.sysmanager.common.pojo.RouterDto;
 import com.moyun.sysmanager.common.pojo.Tree;
@@ -22,23 +21,28 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-/** @author dzh */
+/**
+ * @author dzh
+ */
 @RestController
 @RequestMapping("router")
-public class RouterController {
-  @Resource IMetaService metaService;
-  @Resource IRoutersService routersService;
-  @Resource IRolesService rolesService;
-  @Resource Mapper dozerMapper;
+public class RouterController extends BaseController {
+    @Resource
+    IMetaService metaService;
+    @Resource
+    IRoutersService routersService;
+    @Resource
+    IRolesService rolesService;
+    @Resource
+    Mapper dozerMapper;
 
-  @PostMapping("add")
-  @Transactional
-  public VueResult createRouters(@RequestBody RouterDto routerDto) {
-    Routers router = dozerMapper.map(routerDto, Routers.class);
-    Meta meta = dozerMapper.map(routerDto.getMeta(), Meta.class);
+    @PostMapping("add")
+    @Transactional
+    public VueResult createRouters(@RequestBody RouterDto routerDto) {
+        Routers router = dozerMapper.map(routerDto, Routers.class);
+        Meta meta = dozerMapper.map(routerDto.getMeta(), Meta.class);
     List<RoleDto> list = routerDto.getMeta().getRoles();
     List<Roles> roles=new ArrayList<>();
     list.forEach(roleDto -> roles.add(dozerMapper.map(roleDto,Roles.class)));
