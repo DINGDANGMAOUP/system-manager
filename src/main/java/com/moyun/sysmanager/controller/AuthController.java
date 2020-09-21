@@ -3,8 +3,6 @@ package com.moyun.sysmanager.controller;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.moyun.sysmanager.common.annotation.Log;
-import com.moyun.sysmanager.common.result.Result;
-import com.moyun.sysmanager.common.result.ResultEnum;
 import com.moyun.sysmanager.common.result.VueResult;
 import com.moyun.sysmanager.utils.JWTUtil;
 import com.moyun.sysmanager.web.entity.AdDto;
@@ -20,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Logger;
+
 @Slf4j
 @RestController
 @RequestMapping("/login")

@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.moyun.sysmanager.common.annotation.Log;
 import com.moyun.sysmanager.common.pojo.*;
-import com.moyun.sysmanager.common.result.Result;
 import com.moyun.sysmanager.common.result.VueResult;
 import com.moyun.sysmanager.domainswitcher.entity.TabDomain;
 import com.moyun.sysmanager.domainswitcher.entity.TabDomainInUse;
@@ -141,7 +140,7 @@ public class SysWxController extends BaseController {
     return VueResult.success();
   }
 
-  @RequiresAuthentication
+//  @RequiresAuthentication
   @Log("微信高可用：新增域名")
   @PostMapping("/create")
   @ResponseBody
@@ -149,17 +148,21 @@ public class SysWxController extends BaseController {
   public VueResult createTab(@RequestBody @Valid UsingDomain usingDomain) throws CustmerException {
     try {
       String url1 =
-              "http://ha.quming.online/dws/domain/createWxShortUrl?url=" + usingDomain.getDomain();
+              "http://ha.quming.online/dws/domain/createWxShortUrl?url=";
       String url2 =
-              "http://27.159.82.162:10135/dws/domain/createWxShortUrl?url=" + usingDomain.getDomain();
+              "http://27.159.82.162:10135/dws/domain/createWxShortUrl?url=";
+
       ShortUrlDto shortUrlDto = null;
       ShortUrlDto shortUrlDto2 = null;
       if (usingDomain.getServiceTypeId() == 1 || usingDomain.getServiceTypeId() == 6) {
-        String shortLink1 = usingDomain.getDomain();
-        String shortLink2 = usingDomain.getDomain().replace("olrs", "olrso");
-        shortUrlDto = restTemplate.getForObject(url1, ShortUrlDto.class);
-        shortUrlDto2 = restTemplate.getForObject(url1, ShortUrlDto.class);
+        String shortLink1 =url1+usingDomain.getDomain();
+        String shortLink2 = url1+usingDomain.getDomain().replace("olrs", "olrso");
+        logger.info(shortLink1+"===========");
+        logger.info(shortLink2+"===========");
+        shortUrlDto = restTemplate.getForObject(shortLink1, ShortUrlDto.class);
+        shortUrlDto2 = restTemplate.getForObject(shortLink2, ShortUrlDto.class);
         if (shortUrlDto.getShortUrl().equals(null) || shortUrlDto2.getShortUrl().equals(null)) {
+
           shortUrlDto = restTemplate.getForObject(url2, ShortUrlDto.class);
           shortUrlDto2 = restTemplate.getForObject(url2, ShortUrlDto.class);
         }
@@ -188,7 +191,8 @@ public class SysWxController extends BaseController {
         TDIService.updateById(inUse);
       }
     } catch (Exception e) {
-      throw new CustmerException("参数异常");
+      logger.error(usingDomain.toString()+": 参数异常");
+      return VueResult.fail();
     }
     return VueResult.success();
   }
@@ -200,16 +204,16 @@ public class SysWxController extends BaseController {
    * @return
    */
   @PostMapping
-  public Result update(@RequestBody @Valid TabDomain tabDomain) {
+  public VueResult update(@RequestBody @Valid TabDomain tabDomain) {
     TDService.saveOrUpdate(tabDomain);
-    return Result.success();
+    return VueResult.success();
   }
 
   /**
    * 切换正在使用的域名
    */
   @Transient
-  public Result cutover(@RequestParam String oldDomain, @RequestParam String newDomain) {
+  public VueResult cutover(@RequestParam String oldDomain, @RequestParam String newDomain) {
     // 正在使用的域名
     TabDomain oldDm =
             TDService.getOne(
@@ -225,6 +229,6 @@ public class SysWxController extends BaseController {
                     .set(TabDomainInUse::getDomainId, newDm.getId())
                     .eq(TabDomainInUse::getDomainId, oldDm.getId()));
 
-    return Result.success();
+    return VueResult.success();
   }
 }

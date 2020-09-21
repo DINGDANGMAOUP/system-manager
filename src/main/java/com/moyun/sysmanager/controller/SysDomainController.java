@@ -1,28 +1,18 @@
 package com.moyun.sysmanager.controller;
 
-import ch.qos.logback.classic.Logger;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.moyun.sysmanager.common.annotation.Log;
-import com.moyun.sysmanager.common.result.Result;
 
 import com.moyun.sysmanager.common.result.VueResult;
 import com.moyun.sysmanager.domainnamechecker.entity.TabDomainName;
 import com.moyun.sysmanager.domainnamechecker.service.TabDomainNameService;
-import com.moyun.sysmanager.domainnamechecker.service.TabErrorLogService;
-import com.moyun.sysmanager.domainnamechecker.service.TabManagerService;
-import com.moyun.sysmanager.domainnamechecker.service.TabNotifyLogService;
 import groovy.util.logging.Slf4j;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
 
-import org.apache.ibatis.annotations.Delete;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
