@@ -1,7 +1,7 @@
 package com.moyun.sysmanager.controller;
 
-import com.moyun.sysmanager.common.pojo.RoleDto;
-import com.moyun.sysmanager.common.pojo.RouterDto;
+import com.moyun.sysmanager.common.pojo.RoleDTO;
+import com.moyun.sysmanager.common.pojo.RouterDTO;
 import com.moyun.sysmanager.common.pojo.Tree;
 import com.moyun.sysmanager.common.result.VueResult;
 import com.moyun.sysmanager.domainswitcher.entity.Meta;
@@ -40,17 +40,17 @@ public class RouterController extends BaseController {
 
     @PostMapping("add")
     @Transactional
-    public VueResult createRouters(@RequestBody RouterDto routerDto) {
+    public VueResult createRouters(@RequestBody RouterDTO routerDto) {
         Routers router = dozerMapper.map(routerDto, Routers.class);
         Meta meta = dozerMapper.map(routerDto.getMeta(), Meta.class);
-    List<RoleDto> list = routerDto.getMeta().getRoles();
-    List<Roles> roles=new ArrayList<>();
-    list.forEach(roleDto -> roles.add(dozerMapper.map(roleDto,Roles.class)));
-    routersService.save(router);
-    metaService.save(meta);
-    rolesService.saveBatch(roles);
-    return VueResult.success(router.getId());
-  }
+        List<RoleDTO> list = routerDto.getMeta().getRoles();
+        List<Roles> roles = new ArrayList<>();
+        list.forEach(roleDto -> roles.add(dozerMapper.map(roleDto, Roles.class)));
+        routersService.save(router);
+        metaService.save(meta);
+        rolesService.saveBatch(roles);
+        return VueResult.success(router.getId());
+    }
   @PostMapping("list")
   @Transactional
   public VueResult listRouters() {

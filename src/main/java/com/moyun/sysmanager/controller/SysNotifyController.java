@@ -11,67 +11,71 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+/**
+ * @author dzh
+ */
 @Slf4j
 @RestController
 @RequestMapping("notify")
 public class SysNotifyController extends BaseController {
 
-  // 管理员
-  @Resource
-  TabManagerService TMService;
-  @Resource
-  ManagerService managerService;
+    // 管理员
 
-  @GetMapping("manager")
-  public VueResult findByManager() {
-    return VueResult.success(TMService.list());
-  }
+    @Resource
+    TabManagerService TMService;
+    @Resource
+    ManagerService managerService;
 
-  /**
-   * domainnamechecker
-   * 启用或停止 添加通知手机号  域名高可用
-   *
-   * @param tabManager
-   * @return
-   */
-  @Log("新增或更新短信通知员")
-  @PostMapping("update")
-  public VueResult upDateByManager(@RequestBody TabManager tabManager) {
-    TMService.saveOrUpdate(tabManager);
-    return VueResult.success(tabManager.getTid());
-  }
+    @GetMapping("manager")
+    public VueResult findByManager() {
+        return VueResult.success(TMService.list());
+    }
 
-
-  @Log("删除短信通知员")
-  @DeleteMapping("remove")
-  public VueResult deleteByManager(@RequestBody TabManager tabManager) {
-    TMService.removeById(tabManager);
-    return VueResult.success();
-  }
-
-  /**
-   * domainswitcher
-   * 短信通知
-   */
-
-  @GetMapping("domainswitcher")
-  public VueResult list() {
-    return VueResult.success(managerService.list());
-  }
-
-  @Log("新增或更新短信通知员:公众号")
-  @PostMapping("domainswitcher/update")
-  public VueResult updateByManager(@RequestBody Manager Manager) {
-
-    managerService.saveOrUpdate(Manager);
-    return VueResult.success(Manager.getTid());
-  }
+    /**
+     * domainnamechecker
+     * 启用或停止 添加通知手机号  域名高可用
+     *
+     * @param tabManager
+     * @return
+     */
+    @Log("新增或更新短信通知员")
+    @PostMapping("update")
+    public VueResult upDateByManager(@RequestBody TabManager tabManager) {
+        TMService.saveOrUpdate(tabManager);
+        return VueResult.success(tabManager.getTid());
+    }
 
 
-  @Log("删除短信通知员:公众号")
-  @DeleteMapping("domainswitcher/remove")
-  public VueResult deleteByManagerOne(@RequestBody Manager Manager) {
-    managerService.removeById(Manager);
-    return VueResult.success();
-  }
+    @Log("删除短信通知员")
+    @DeleteMapping("remove")
+    public VueResult deleteByManager(@RequestBody TabManager tabManager) {
+        TMService.removeById(tabManager);
+        logger.info("删除管理员-{}", tabManager.getName());
+        return VueResult.success();
+    }
+
+    /**
+     * domainswitcher
+     * 短信通知
+     */
+
+    @GetMapping("domainswitcher")
+    public VueResult list() {
+        return VueResult.success(managerService.list());
+    }
+
+    @Log("新增或更新短信通知员:公众号")
+    @PostMapping("domainswitcher/update")
+    public VueResult updateByManager(@RequestBody Manager manager) {
+        managerService.saveOrUpdate(manager);
+        return VueResult.success(manager.getTid());
+    }
+
+
+    @Log("删除短信通知员:公众号")
+    @DeleteMapping("domainswitcher/remove")
+    public VueResult deleteByManagerOne(@RequestBody Manager Manager) {
+        managerService.removeById(Manager);
+        return VueResult.success();
+    }
 }

@@ -5,6 +5,6 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class UsingIdDto implements Serializable {
-private Integer id;
+public class DomainUsDTO implements Serializable {
+    private String domain;
 }

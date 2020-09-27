@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @NoArgsConstructor
 @Data
-public class OrderFdDto implements Serializable {
+public class OrderFdDTO implements Serializable {
 
     /**
      * meal : null

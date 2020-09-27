@@ -2,13 +2,14 @@ package com.moyun.sysmanager.domainnamechecker.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.moyun.sysmanager.domainnamechecker.entity.TabDomainName;
 import com.moyun.sysmanager.domainnamechecker.mapper.TabDomainNameMapper;
 import com.moyun.sysmanager.domainnamechecker.service.TabDomainNameService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import java.util.List;
-import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /** @author kuroneko */
 @Service
@@ -21,18 +22,14 @@ public class TabDomainNameServiceImpl
 
   @Override
   public List<TabDomainName> listSort() {
-    List<TabDomainName> dncTabDomainNames =
-        dncTabDomainNameMapper.selectList(
-            Wrappers.<TabDomainName>lambdaQuery().select().orderByAsc(TabDomainName::getTid));
-    return dncTabDomainNames;
+      return dncTabDomainNameMapper.selectList(
+              Wrappers.<TabDomainName>lambdaQuery().select().orderByAsc(TabDomainName::getTid));
   }
 
   @Override
   public List<TabDomainName> search(String domainName) {
-    List<TabDomainName> searchList =
-        dncTabDomainNameMapper.selectList(
-            Wrappers.<TabDomainName>lambdaQuery()
-                .like(TabDomainName::getDomainName, domainName));
-    return searchList;
+      return dncTabDomainNameMapper.selectList(
+              Wrappers.<TabDomainName>lambdaQuery()
+                      .like(TabDomainName::getDomainName, domainName));
   }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Data
-public class OrderDto implements Serializable {
+public class OrderDTO implements Serializable {
 
     /**
      * code : 1

@@ -2,6 +2,9 @@ package com.moyun.sysmanager.utils;
 
 import org.apache.shiro.authc.AuthenticationToken;
 
+/**
+ * @author dzh
+ */
 public class JWTToken implements AuthenticationToken {
 
     // 密钥

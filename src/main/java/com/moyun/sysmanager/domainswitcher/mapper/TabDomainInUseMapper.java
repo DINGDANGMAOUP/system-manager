@@ -1,10 +1,11 @@
 package com.moyun.sysmanager.domainswitcher.mapper;
 
-import com.moyun.sysmanager.common.pojo.DomainInUsDto;
-import com.moyun.sysmanager.common.pojo.DomainUsDto;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.moyun.sysmanager.common.pojo.DomainInUsDTO;
+import com.moyun.sysmanager.common.pojo.DomainUsDTO;
 import com.moyun.sysmanager.common.pojo.UsingDomain;
 import com.moyun.sysmanager.domainswitcher.entity.TabDomainInUse;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
 import java.util.List;
 
 /** @author kuroneko */
@@ -12,7 +13,7 @@ public interface TabDomainInUseMapper extends BaseMapper<TabDomainInUse> {
 
   UsingDomain findByUsing(Integer serviceTypeId);
 
-  List<DomainInUsDto> findAllUsing();
+    List<DomainInUsDTO> findAllUsing();
 
-  DomainUsDto findUsingAtDomain(Integer serviceTypeId);
+    DomainUsDTO findUsingAtDomain(Integer serviceTypeId);
 }

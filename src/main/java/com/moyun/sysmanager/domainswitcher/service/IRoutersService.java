@@ -1,7 +1,6 @@
 package com.moyun.sysmanager.domainswitcher.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.moyun.sysmanager.common.pojo.RouterDto;
 import com.moyun.sysmanager.domainswitcher.entity.Routers;
 
 /**

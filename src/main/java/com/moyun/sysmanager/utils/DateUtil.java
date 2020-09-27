@@ -7,23 +7,31 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
-/** 时间工具类 */
+/**
+ * 时间工具类
+ *
+ * @author dzh
+ */
 public class DateUtil {
 
-  public static final String FULL_TIME_PATTERN = "yyyyMMddHHmmss";
+    public static final String FULL_TIME_PATTERN = "yyyyMMddHHmmss";
 
-  public static final String FULL_TIME_SPLIT_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    public static final String FULL_TIME_SPLIT_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
-  public static String formatFullTime(LocalDateTime localDateTime) {
-    return formatFullTime(localDateTime, FULL_TIME_PATTERN);
-  }
+    public static String now(String pattern) {
+        return DateUtil.formatFullTime(LocalDateTime.now(), pattern);
+    }
 
-  public static String formatFullTime(LocalDateTime localDateTime, String pattern) {
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
-    return localDateTime.format(dateTimeFormatter);
-  }
+    public static String formatFullTime(LocalDateTime localDateTime) {
+        return formatFullTime(localDateTime, FULL_TIME_PATTERN);
+    }
 
-  private static String getDateFormat(Date date, String dateFormatType) {
+    public static String formatFullTime(LocalDateTime localDateTime, String pattern) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
+        return localDateTime.format(dateTimeFormatter);
+    }
+
+    private static String getDateFormat(Date date, String dateFormatType) {
     SimpleDateFormat simformat = new SimpleDateFormat(dateFormatType);
     return simformat.format(date);
   }

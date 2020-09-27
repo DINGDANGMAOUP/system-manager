@@ -1,11 +1,12 @@
 package com.moyun.sysmanager.common.pojo;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 @Data
-public class NotifyAndManagerDto  implements Serializable {
+public class NotifyAndManagerDTO implements Serializable {
     private Integer tid;
     private String domainName;
     private LocalDateTime notifyTime;

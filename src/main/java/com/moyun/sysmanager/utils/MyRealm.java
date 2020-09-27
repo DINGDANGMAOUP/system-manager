@@ -3,9 +3,6 @@ package com.moyun.sysmanager.utils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.moyun.sysmanager.web.entity.Admin;
 import com.moyun.sysmanager.web.service.AdminService;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
@@ -19,6 +16,13 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * @author dzh
+ */
 @Service
 public class MyRealm extends AuthorizingRealm {
 

@@ -2,18 +2,16 @@ package com.moyun.sysmanager.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.moyun.sysmanager.common.annotation.Log;
-
 import com.moyun.sysmanager.common.result.VueResult;
 import com.moyun.sysmanager.domainnamechecker.entity.TabDomainName;
 import com.moyun.sysmanager.domainnamechecker.service.TabDomainNameService;
 import groovy.util.logging.Slf4j;
-
-import java.util.List;
-import javax.annotation.Resource;
-import javax.validation.Valid;
-
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -43,6 +41,7 @@ public class SysDomainController extends BaseController {
   @DeleteMapping("remove")
   public VueResult deleteDomain(@RequestBody @Valid TabDomainName TabDomainName) {
     TDNService.removeById(TabDomainName);
+      logger.info("删除{}域名", TabDomainName.getDomainName());
     return VueResult.success();
   }
 

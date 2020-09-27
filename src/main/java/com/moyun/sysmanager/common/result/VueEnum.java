@@ -11,7 +11,9 @@ public enum VueEnum {
     UNKNOWN(60000, "unknown"),
     ENABLE_FAILURE(80001, "enable_failure"),
     ORDERID_NULL(80002, "请输入正确的订单号"),
-    REFUND_FAIL(80003, "退款失败");
+    REFUND_FAIL(80003, "退款失败"),
+    TIMES_LIMIT(80004, "本月生成短链次数已达上限");
+
     private int code;
     private String desc;
 

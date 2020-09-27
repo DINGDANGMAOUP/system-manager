@@ -1,55 +1,49 @@
 package com.moyun.sysmanager.controller;
 
 
-
-import com.moyun.sysmanager.common.annotation.Log;
-import com.moyun.sysmanager.common.annotation.entity.SysLog;
 import com.moyun.sysmanager.common.result.VueResult;
-import com.moyun.sysmanager.utils.HttpContextUtil;
-import com.moyun.sysmanager.utils.IPUtil;
-import com.moyun.sysmanager.utils.JWTUtil;
-import org.apache.commons.lang3.StringUtils;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
-import org.springframework.scheduling.Trigger;
-import org.springframework.scheduling.TriggerContext;
-
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Method;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Timer;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
 @RestController
 @RequestMapping("test")
-@Async
 public class TestController extends BaseController{
 
 
-
+    @Async
     @GetMapping("test")
     public VueResult testResult() throws InterruptedException {
         System.out.println("开始啦");
         testAsync();
-        return VueResult.success();
+        System.out.println("test");
+        return VueResult.success("lalla");
 
     }
     @Async
     private void testAsync() throws InterruptedException {
-    Thread.sleep(5000);
-    System.out.println("结束啦");
+
+        /*Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2020);//年
+        calendar.set(Calendar.MONTH, 5);//月
+        calendar.set(Calendar.DATE , 18);//日
+        calendar.set(Calendar.HOUR_OF_DAY, 9);//时
+
+        calendar.set(Calendar.MINUTE, 20);//分
+
+        calendar.set(Calendar.SECOND, 0);//秒
+
+
+
+        Date time = calendar.getTime();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String timeFormat = sdf.format(time);*/
+
+
+        Thread.sleep(5000);
+        System.out.println("结束啦");
     }
 
 

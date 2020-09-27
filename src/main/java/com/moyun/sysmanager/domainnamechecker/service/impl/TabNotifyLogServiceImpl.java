@@ -1,14 +1,15 @@
 package com.moyun.sysmanager.domainnamechecker.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
-import com.moyun.sysmanager.common.pojo.NotifyAndManagerDto;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.moyun.sysmanager.common.pojo.NotifyAndManagerDTO;
 import com.moyun.sysmanager.domainnamechecker.entity.TabNotifyLog;
 import com.moyun.sysmanager.domainnamechecker.mapper.TabNotifyLogMapper;
 import com.moyun.sysmanager.domainnamechecker.service.TabNotifyLogService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import java.util.List;
-import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 /** @author kuroneko */
 @Service
@@ -18,9 +19,8 @@ public class TabNotifyLogServiceImpl extends ServiceImpl<TabNotifyLogMapper, Tab
   @Resource
   TabNotifyLogMapper tabNotifyLogMapper;
 
-  @Override
-  public List<NotifyAndManagerDto> findByNotifyAndManager(String domainName) {
-    List<NotifyAndManagerDto> list=  tabNotifyLogMapper.findByNotifyAndManager(domainName);
-    return list;
-  }
+    @Override
+    public List<NotifyAndManagerDTO> findByNotifyAndManager(String domainName) {
+        return tabNotifyLogMapper.findByNotifyAndManager(domainName);
+    }
 }

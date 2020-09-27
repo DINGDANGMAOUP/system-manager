@@ -1,12 +1,7 @@
 package com.moyun.sysmanager.common.Threads;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
 /**
- * Created by Administrator on 2019/8/5.
+ * Created by Administrator on
  */
 //@Data
 //@Component

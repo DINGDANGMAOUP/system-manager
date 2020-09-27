@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <contextName>moyun</contextName>
-    <property name="log.path" value="D:/www/gky.ufuns.cn/logs"/>
+    <!--    测试服-->
+    <!--    <property name="log.path" value="D:/www/gky.ufuns.cn/logs"/>-->
+    <!--    正式服-->
+<!--    <property name="log.path" value="D:/www/ha.quming.online/logs"/>-->
+    <!--    本地-->
+        <property name="log.path" value="logs"/>
+
     <property name="log.maxHistory" value="15"/>
     <property name="log.colorPattern"
               value="%d{yyyy-MM-dd HH:mm:ss} | %highlight(%-5level) | %boldYellow(%thread) | %boldGreen(%logger) | %msg%n"/>

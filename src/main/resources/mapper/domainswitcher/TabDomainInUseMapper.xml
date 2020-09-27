@@ -2,14 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moyun.sysmanager.domainswitcher.mapper.TabDomainInUseMapper">
 
-  <select id="findByUsing" resultType="com.moyun.sysmanager.common.pojo.UsingDomain">select tab_domain.id,tab_domain.domain,tab_domain.state,tab_domain.service_type_id from tab_domain_in_use left join tab_domain on tab_domain_in_use.domain_id=tab_domain.id where service_type_id=#{serviceTypeId}
+    <select id="findByUsing" resultType="com.moyun.sysmanager.common.pojo.UsingDomain">
+  select
+  tab_domain.id,tab_domain.domain,tab_domain.state,tab_domain.service_type_id
+  from
+  tab_domain_in_use
+  left join
+  tab_domain
+  on
+  tab_domain_in_use.domain_id=tab_domain.id
+  where
+  service_type_id=#{serviceTypeId}
 
   </select>
-  <select id="findAllUsing"
-    resultType="com.moyun.sysmanager.common.pojo.DomainInUsDto">
-    select tab_domain_in_use.id,tab_domain_in_use.wx_appid,tab_domain_in_use.wx_name,tab_domain.domain,tab_domain.state,tab_domain.service_type_id from tab_domain_in_use left join tab_domain on tab_domain_in_use.domain_id=tab_domain.id
+    <select id="findAllUsing"
+            resultType="com.moyun.sysmanager.common.pojo.DomainInUsDTO">
+    select
+    tab_domain_in_use.id,tab_domain_in_use.wx_appid,tab_domain_in_use.wx_name,tab_domain.domain,tab_domain.state,tab_domain.service_type_id
+    from
+    tab_domain_in_use
+    left join
+    tab_domain
+    on
+    tab_domain_in_use.domain_id=tab_domain.id
   </select>
-  <select id="findUsingAtDomain" resultType="com.moyun.sysmanager.common.pojo.DomainUsDto">
-    SELECT tab_domain.domain FROM tab_domain_in_use LEFT JOIN tab_domain ON tab_domain_in_use.domain_id=tab_domain.id WHERE tab_domain.service_type_id=#{serviceTypeId}
+    <select id="findUsingAtDomain" resultType="com.moyun.sysmanager.common.pojo.DomainUsDTO">
+    SELECT
+    tab_domain.domain
+    FROM
+    tab_domain_in_use
+    LEFT JOIN
+    tab_domain
+    ON
+    tab_domain_in_use.domain_id=tab_domain.id
+    WHERE
+    tab_domain.service_type_id=#{serviceTypeId}
   </select>
 </mapper>

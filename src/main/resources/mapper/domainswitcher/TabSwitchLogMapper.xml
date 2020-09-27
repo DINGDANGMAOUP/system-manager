@@ -3,10 +3,24 @@
 <mapper namespace="com.moyun.sysmanager.domainswitcher.mapper.TabSwitchLogMapper">
 
     <select id="findByAll" resultType="com.moyun.sysmanager.domainswitcher.entity.TabSwitchLog">
-        select  * from tab_switch_log where 1=1
+        select
+        *
+        from
+        tab_switch_log
+        where
+        1=1
         <if test="domain != null and domain != ''">
-            AND tab_switch_log.origin_domain like  '%${domain}%' or tab_switch_log.new_domain like  '%${domain}%'
+            AND
+            tab_switch_log.origin_domain
+            like
+            '%${domain}%'
+            or
+            tab_switch_log.new_domain
+            like
+            '%${domain}%'
         </if>
-        order by  tab_switch_log.switch_time desc
+        order by
+        tab_switch_log.switch_time
+        desc
     </select>
 </mapper>

@@ -3,10 +3,8 @@ package com.moyun.sysmanager.common.pojo;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
-public class RouterDto implements Cloneable {
+public class RouterDTO implements Cloneable {
     private String path;
 
     private String component;
@@ -23,5 +21,5 @@ public class RouterDto implements Cloneable {
     private Integer alwaysShow;
 
     private Integer parentId;
-    MetaDto meta;
+    MetaDTO meta;
 }

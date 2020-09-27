@@ -8,7 +8,7 @@ import java.util.List;
  * @author dzh
  */
 @Data
-public class MetaDto {
+public class MetaDTO {
     private String tittle;
 
     private String icon;
@@ -20,7 +20,7 @@ public class MetaDto {
     private Integer affix;
 
     private String activeMenu;
-    List<RoleDto> roles;
+    List<RoleDTO> roles;
 
 
 }
