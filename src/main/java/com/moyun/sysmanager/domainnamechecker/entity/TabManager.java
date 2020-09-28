@@ -12,6 +12,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import static com.moyun.sysmanager.Constants.PHONE;
+
 /**
  * 管理员表（即需要短信通知的人员）
  *
@@ -30,7 +32,7 @@ public class TabManager implements Serializable {
   private Integer tid;
 
 
-  @Pattern(regexp = "^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$",message = "手机号格式错误")
+  @Pattern(regexp = PHONE,message = "手机号格式错误")
   /** 管理员手机号码 */
   private String phone;
 

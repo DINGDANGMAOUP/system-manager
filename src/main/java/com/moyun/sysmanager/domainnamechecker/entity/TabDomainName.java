@@ -1,17 +1,19 @@
 package com.moyun.sysmanager.domainnamechecker.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+
+import static com.moyun.sysmanager.Constants.DOMAIN;
 
 /**
  * 域名表
@@ -32,9 +34,7 @@ public class TabDomainName implements Serializable {
 
   /** 域名或URL */
   @NotBlank
-  @Pattern(
-      regexp =
-          "^(?=^.{3,255}$)(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\\d+)*(\\/\\w+\\.\\w+)*$",message = "请输入正确的域名")
+  @Pattern(regexp = DOMAIN, message = "请输入正确的域名")
   @TableField("`domainName`")
   private String domainName;
 

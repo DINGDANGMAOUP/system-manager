@@ -1,5 +1,9 @@
 package com.moyun.sysmanager.common.result;
 
+/**
+ * @author dzh
+ */
+
 public enum VueEnum {
     SUCCESS(20000, "success"),
     ILLEGAL_OPERATION(20001, "ILLEGAL_OPERATION"),

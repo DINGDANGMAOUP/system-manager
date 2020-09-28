@@ -5,6 +5,9 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * @author dzh
+ */
 @Data
 public class NotifyAndManagerDTO implements Serializable {
     private Integer tid;

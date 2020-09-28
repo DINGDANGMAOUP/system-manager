@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * @author dzh
+ */
 @Data
 public class DomainInUsDTO implements Serializable {
 

@@ -44,8 +44,6 @@ public final class Constants {
     public static final String CREATE_SHORT_CHAIN_BAK = "http://27.159.82.162:10135/dws/domain/createWxShortUrl?url={::domain::}";
     /**
      * 获取结果页域名
-     *
-     * @return
      */
     public static final String GET_RESULTS_PAGE = "http://ha.quming.online/dws/domain/domains/inside";
     /**
@@ -64,6 +62,13 @@ public final class Constants {
      * 智能取名投诉订单查询
      */
     public static final String FD = "http://fd.jm9t.top";
+    /**
+     * 正则匹配
+     * DOMAIN:域名正则
+     * PHONE:手机号正则
+     */
+    public static final String DOMAIN="^(?=^.{3,255}$)(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\\d+)*(\\/\\w+\\.\\w+)*$";
+    public static final String PHONE="^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
     private Constants() {
         throw new IllegalStateException("Utility class");
     }

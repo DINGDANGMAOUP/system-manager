@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 
+/**
+ * @author dzh
+ */
 @Data
 public class SysLog implements Serializable {
   @TableId(value = "id" ,type = IdType.AUTO)
