@@ -7,16 +7,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.moyun.sysmanager.Constants.FULL_TIME_PATTERN;
+
 /**
  * 时间工具类
  *
  * @author dzh
  */
 public class DateUtil {
-
-    public static final String FULL_TIME_PATTERN = "yyyyMMddHHmmss";
-
-    public static final String FULL_TIME_SPLIT_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     public static String now(String pattern) {
         return DateUtil.formatFullTime(LocalDateTime.now(), pattern);

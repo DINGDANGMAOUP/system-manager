@@ -41,11 +41,11 @@ public class AuthController {
             log.info("登入失败");
             return VueResult.fail("用户不存在");
         }
-        String Token = JWTUtil.sign(admin.getUsername(), admin.getPassword());
-        Cookie cookie = new Cookie("token", Token);
+        String token = JWTUtil.sign(admin.getUsername(), admin.getPassword());
+        Cookie cookie = new Cookie("token", token);
         response.addCookie(cookie);
-        HashMap<Object, Object> map = new HashMap<>();
-        map.put("token", Token);
+        HashMap<Object, Object> map = new HashMap<>(1);
+        map.put("token", token);
 
         return VueResult.success(map);
     }

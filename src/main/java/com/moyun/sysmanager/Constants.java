@@ -5,8 +5,38 @@ package com.moyun.sysmanager;
  */
 public final class Constants {
 
+
     public static final String ENCODING = "UTF-8";
     public static final String SERVICE_ID = "sysmamnger";
+    /**
+     * 日期格式
+     */
+    public static final String FULL_TIME_PATTERN = "yyyyMMddHHmmss";
+    public static final String FULL_TIME_SPLIT_PATTERN = "yyyy-MM-dd HH:mm:ss";
+    /**
+     * 响应状态码
+     */
+    public static final int CODE_SUCCESS=200;
+    /**
+     * 服务对应serviceTypeId
+     * 取名-RESURL:1
+     * 取名菜单-OLQM:3
+     * 大师菜单-MSTR:4
+     * 大师-NEWONLINEMASTER:5
+     * 测名-TESTURL:6
+     */
+    public static final int RESURL = 1;
+    public static final int OLQM = 3;
+    public static final int MSTR = 4;
+    public static final int NEWONLINEMASTER = 5;
+    public static final int TESTURL = 6;
+    /**
+     * 取名测名结果页前缀
+     * OLRSO：olrso.ha.my9b.cn [125.77.158.157]
+     * OLRS：olrs.ha.my9b.cn [117.24.13.147]
+     */
+    public static final String OLRSO = "olrso";
+    public static final String OLRS = "olrs";
     /**
      * 创建短链api
      */

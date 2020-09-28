@@ -13,6 +13,7 @@ import com.moyun.sysmanager.domainswitcher.entity.TabSwitchLog;
 import com.moyun.sysmanager.domainswitcher.service.TabBlockedLogService;
 import com.moyun.sysmanager.domainswitcher.service.TabSwitchLogService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,9 @@ import javax.annotation.Resource;
 import java.beans.Transient;
 import java.util.List;
 
+/**
+ * @author dzh
+ */
 @Slf4j
 @RestController
 @RequestMapping("SysLog")
@@ -31,8 +35,9 @@ public class SysLogController extends BaseController {
    */
 
   // 异常通知
+
   @Resource
-  TabNotifyLogService TNLService;
+  TabNotifyLogService tabNotifyLogService;
 
   @Resource
   TabErrorLogService tabErrorLogService;
@@ -40,11 +45,13 @@ public class SysLogController extends BaseController {
    * SysWx
    */
   // 域名替换记录
+
   @Resource
-  TabSwitchLogService TSLService;
+  TabSwitchLogService tabSwitchLogService;
   // 被屏蔽的域名记录
+
   @Resource
-  TabBlockedLogService TBLService;
+  TabBlockedLogService tabBlockedLogService;
   @Resource
   SysLogService sysLogService;
 
@@ -56,7 +63,7 @@ public class SysLogController extends BaseController {
   public VueResult findByBlock(String domain) {
     String trim = domain.trim();
     List<TabBlockedLog> list =
-            TBLService.list(
+            tabBlockedLogService.list(
                     Wrappers.<TabBlockedLog>lambdaQuery()
                             .like(TabBlockedLog::getDomain, trim)
                             .orderByDesc(TabBlockedLog::getBlockTime));
@@ -80,7 +87,7 @@ public class SysLogController extends BaseController {
   @GetMapping("switch")
   @Transient
   public VueResult findBySwitch(String domain) {
-    List<TabSwitchLog> list = TSLService.findByAll(domain);
+    List<TabSwitchLog> list = tabSwitchLogService.findByAll(domain);
 
     return VueResult.success(list);
   }
@@ -88,8 +95,8 @@ public class SysLogController extends BaseController {
   @GetMapping("notify")
   @Transient
   public VueResult findByNotify(String domainName) {
-    String trim = domainName.trim();
-    List<NotifyAndManagerDTO> list = TNLService.findByNotifyAndManager(trim);
+    String trim = StringUtils.trim(domainName);
+    List<NotifyAndManagerDTO> list = tabNotifyLogService.findByNotifyAndManager(trim);
 
     return VueResult.success(list);
   }

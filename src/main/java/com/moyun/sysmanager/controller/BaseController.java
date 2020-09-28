@@ -16,7 +16,7 @@ public class BaseController {
     Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     protected Map<String, Object> getDataTable(IPage<?> pageInfo) {
-        Map<String, Object> rspData = new HashMap<>();
+        Map<String, Object> rspData = new HashMap<>(2);
         rspData.put("rows", pageInfo.getRecords());
         rspData.put("total", pageInfo.getTotal());
         return rspData;

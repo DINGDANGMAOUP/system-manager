@@ -11,7 +11,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
-import static com.moyun.sysmanager.utils.DateUtil.FULL_TIME_SPLIT_PATTERN;
+import static com.moyun.sysmanager.Constants.CODE_SUCCESS;
+import static com.moyun.sysmanager.Constants.FULL_TIME_SPLIT_PATTERN;
+
 
 /**
  * @author dzh
@@ -56,7 +58,7 @@ public class RestTemplateUtil {
   }
 
   public static void serverIsRight(ResponseEntity responseEntity) {
-    if (responseEntity.getStatusCodeValue() == 200) {
+    if (responseEntity.getStatusCodeValue() == CODE_SUCCESS) {
       log.info("服务器请求成功：{}--时间（{}）", responseEntity.getStatusCodeValue(), DateUtil.now(FULL_TIME_SPLIT_PATTERN));
     } else {
       log.info("服务器请求异常：{}--时间（{}）", responseEntity.getStatusCodeValue(), DateUtil.now(FULL_TIME_SPLIT_PATTERN));

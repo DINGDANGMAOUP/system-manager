@@ -13,23 +13,26 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * @author dzh
+ */
 @Slf4j
 @RestController
 @RequestMapping("SysDomain")
 public class SysDomainController extends BaseController {
   // 域名
-  @Resource TabDomainNameService TDNService;
+  @Resource TabDomainNameService tabDomainNameService;
 
   /**
    * 获取域名高可用列表
    *
-   * @return
+   * @return 返回域名列表
    */
   @GetMapping("list")
   public VueResult findAll( String domainName) {
     String trim = domainName.trim();
     List<TabDomainName> list =
-        TDNService.list(
+        tabDomainNameService.list(
             Wrappers.<TabDomainName>lambdaQuery().like(TabDomainName::getDomainName, trim));
 
     return VueResult.success(list);
@@ -39,9 +42,9 @@ public class SysDomainController extends BaseController {
 
   @Log("域名高可用：删除域名")
   @DeleteMapping("remove")
-  public VueResult deleteDomain(@RequestBody @Valid TabDomainName TabDomainName) {
-    TDNService.removeById(TabDomainName);
-      logger.info("删除{}域名", TabDomainName.getDomainName());
+  public VueResult deleteDomain(@RequestBody @Valid TabDomainName tabDomainName) {
+    tabDomainNameService.removeById(tabDomainName);
+      logger.info("删除{}域名", tabDomainName.getDomainName());
     return VueResult.success();
   }
 
@@ -51,7 +54,7 @@ public class SysDomainController extends BaseController {
   @PostMapping("/enable")
   public VueResult enable(@RequestBody  TabDomainName tabDomainName) {
     tabDomainName.setState(1);
-    TDNService.updateById(tabDomainName);
+    tabDomainNameService.updateById(tabDomainName);
     return VueResult.success();
   }
 
@@ -61,7 +64,7 @@ public class SysDomainController extends BaseController {
   @PostMapping("/disable")
   public VueResult disable(@RequestBody  TabDomainName tabDomainName) {
     tabDomainName.setState(0);
-    TDNService.updateById(tabDomainName);
+    tabDomainNameService.updateById(tabDomainName);
     return VueResult.success();
   }
 
@@ -70,7 +73,7 @@ public class SysDomainController extends BaseController {
   @ResponseBody
   @PostMapping("/add")
   public VueResult add(@RequestBody @Valid TabDomainName tabDomainName) {
-    TDNService.save(tabDomainName);
+    tabDomainNameService.save(tabDomainName);
     return VueResult.success();
   }
 }

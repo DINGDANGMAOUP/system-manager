@@ -30,43 +30,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.moyun.sysmanager.Constants.*;
-import static com.moyun.sysmanager.utils.DateUtil.FULL_TIME_SPLIT_PATTERN;
 
-/**
- * @author dzh
- */
+/** @author dzh */
 @Slf4j
 @RestController
 @RequestMapping("sysWx")
 @Validated
 public class SysWxController extends BaseController {
 
-  //  private static final String WXURLUP = "http://mytest.my9v.top/wechatrobot/wx/domain/update";
-  //  private static final String WXURLUP = "http://mdk.ufuns.cn/wxserver/wx/domain/update";
-  //  private static final String WXURLUP =
-  // "http://wechatrobot.quming.online/wxserver/wx/domain/update";
-  //  private static final String WXURLUPBAK = "http://my9f.top/shortLink/updateDomainName";
-  //  private static final String WXURLUPBAK = "http://mdk.ufuns.cn/shortLink/updateDomainName";
-  //  private static final String WXURLUPBAK = "http://my9f.top/shortLink/updateDomainName";
-
   /** 使用中的域名表 */
-  @Resource
-  TabDomainInUseService TDIService;
+  @Resource TabDomainInUseService tabDomainInUseService;
   /** 域名表 */
-  @Resource
-  TabDomainService TDService;
+  @Resource TabDomainService tabDomainService;
 
   @GetMapping("list")
   @Transactional
   public VueResult findAll(
-          @RequestParam(value = "serviceTypeId", defaultValue = "1") Integer serviceTypeId) {
-    UsingDomain uDomain = TDIService.findByUsing(serviceTypeId);
+      @RequestParam(value = "serviceTypeId", defaultValue = "1") Integer serviceTypeId) {
+    UsingDomain uDomain = tabDomainInUseService.findByUsing(serviceTypeId);
     uDomain.setUsing(true);
-    List<UsingDomain> Domains = TDService.findBySpare(serviceTypeId, uDomain.getId());
-    Domains.forEach(usingDomain -> usingDomain.setUsing(false));
+    List<UsingDomain> domains = tabDomainService.findBySpare(serviceTypeId, uDomain.getId());
+    domains.forEach(usingDomain -> usingDomain.setUsing(false));
     ArrayList<UsingDomain> result = new ArrayList<>();
     result.add(uDomain);
-    result.addAll(Domains);
+    result.addAll(domains);
     return VueResult.success(result);
   }
 
@@ -80,7 +67,7 @@ public class SysWxController extends BaseController {
     TabDomain tabDomain = new TabDomain();
     tabDomain.setId(usingDomain.getId());
     tabDomain.setState(1);
-    TDService.updateById(tabDomain);
+    tabDomainService.updateById(tabDomain);
     return VueResult.success();
   }
 
@@ -93,7 +80,7 @@ public class SysWxController extends BaseController {
     TabDomain tabDomain = new TabDomain();
     tabDomain.setId(usingDomain.getId());
     tabDomain.setState(0);
-    TDService.updateById(tabDomain);
+    tabDomainService.updateById(tabDomain);
     return VueResult.success();
   }
 
@@ -105,31 +92,31 @@ public class SysWxController extends BaseController {
   public VueResult bySwitch(@RequestBody UsingDomain usingDomain) {
 
     Integer serviceTypeId = usingDomain.getServiceTypeId();
-    UsingIdDTO usingIdDto = TDService.findByUsingId(serviceTypeId);
+    UsingIdDTO usingIdDto = tabDomainService.findByUsingId(serviceTypeId);
     TabDomainInUse inUse = new TabDomainInUse();
     inUse.setId(usingIdDto.getId());
     inUse.setDomainId(usingDomain.getId());
     TabDomain tabDomain = new TabDomain();
     tabDomain.setId(usingDomain.getId());
     tabDomain.setState(1);
-    TDIService.updateById(inUse);
-    TDService.updateById(tabDomain);
-    if (serviceTypeId == 1 || serviceTypeId == 5 || serviceTypeId == 6) {
+    tabDomainInUseService.updateById(inUse);
+    tabDomainService.updateById(tabDomain);
+    if (serviceTypeId == RESURL || serviceTypeId == NEWONLINEMASTER || serviceTypeId == TESTURL) {
       JSONObject request = RestTemplateUtil.getRequest(GET_RESULTS_PAGE);
       RestTemplateUtil.getPostJsonRequest(request, UPDATE_RESULTS_PAGE);
       logger.info(
-              "操作时间({})--获取最新结果页域名更新成功（切换操作）",
-              DateUtil.formatFullTime(LocalDateTime.now(), FULL_TIME_SPLIT_PATTERN));
+          "操作时间({})--获取最新结果页域名更新成功（切换操作）",
+          DateUtil.formatFullTime(LocalDateTime.now(), FULL_TIME_SPLIT_PATTERN));
     }
-    if (serviceTypeId == 3 || serviceTypeId == 4) {
-      MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-      DomainUsDTO domainUsDto = TDIService.findUsingAtDomain(usingDomain.getServiceTypeId());
+    if (serviceTypeId == OLQM || serviceTypeId == MSTR) {
+      MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+      DomainUsDTO domainUsDto = tabDomainInUseService.findUsingAtDomain(usingDomain.getServiceTypeId());
       params.add("oldDomainName", domainUsDto.getDomain());
       params.add("newDomainName", usingDomain.getDomain());
       RestTemplateUtil.getPostFormRequest(params, UPDATE_MENU_PAGE);
       logger.info(
-              "操作时间({})--菜单域名更新成功（切换操作）",
-              DateUtil.formatFullTime(LocalDateTime.now(), FULL_TIME_SPLIT_PATTERN));
+          "操作时间({})--菜单域名更新成功（切换操作）",
+          DateUtil.formatFullTime(LocalDateTime.now(), FULL_TIME_SPLIT_PATTERN));
     }
     return VueResult.success();
   }
@@ -143,57 +130,57 @@ public class SysWxController extends BaseController {
     try {
 
       /** 常用 */
-      String link_1 =
-              StringUtils.replace(CREATE_SHORT_CHAIN, "{::domain::}", usingDomain.getDomain());
-      String link_2 =
-              StringUtils.replace(
-                      CREATE_SHORT_CHAIN, "{::domain::}", usingDomain.getDomain().replace("olrs", "olrso"));
+      String link1 =
+          StringUtils.replace(CREATE_SHORT_CHAIN, "{::domain::}", usingDomain.getDomain());
+      String link2 =
+          StringUtils.replace(
+              CREATE_SHORT_CHAIN, "{::domain::}", usingDomain.getDomain().replace(OLRS, OLRSO));
 
       /** 备用 */
-      String link_3 =
-              StringUtils.replace(CREATE_SHORT_CHAIN_BAK, "{::domain::}", usingDomain.getDomain());
-      String link_4 =
-              StringUtils.replace(
-                      CREATE_SHORT_CHAIN_BAK,
-                      "{::domain::}",
-                      usingDomain.getDomain().replace("olrs", "olrso"));
-      String shortUrl_1 = null;
-      String shortUrl_2 = null;
-      if (usingDomain.getServiceTypeId() == 1 || usingDomain.getServiceTypeId() == 6) {
+      String link3 =
+          StringUtils.replace(CREATE_SHORT_CHAIN_BAK, "{::domain::}", usingDomain.getDomain());
+      String link4 =
+          StringUtils.replace(
+              CREATE_SHORT_CHAIN_BAK,
+              "{::domain::}",
+              usingDomain.getDomain().replace(OLRS, OLRSO));
+      String shortUrl1;
+      String shortUrl2;
+      if (usingDomain.getServiceTypeId() == RESURL || usingDomain.getServiceTypeId() == TESTURL) {
 
-        shortUrl_1 = RestTemplateUtil.getRequest(link_1).getString("shortUrl");
-        shortUrl_2 = RestTemplateUtil.getRequest(link_2).getString("shortUrl");
+        shortUrl1 = RestTemplateUtil.getRequest(link1).getString("shortUrl");
+        shortUrl2 = RestTemplateUtil.getRequest(link2).getString("shortUrl");
 
-        if (StringUtils.isEmpty(shortUrl_1) && StringUtils.isEmpty(shortUrl_2)) {
-          shortUrl_1 = RestTemplateUtil.getRequest(link_3).getString("shortUrl");
-          shortUrl_2 = RestTemplateUtil.getRequest(link_4).getString("shortUrl");
+        if (StringUtils.isEmpty(shortUrl1) && StringUtils.isEmpty(shortUrl2)) {
+          shortUrl1 = RestTemplateUtil.getRequest(link3).getString("shortUrl");
+          shortUrl2 = RestTemplateUtil.getRequest(link4).getString("shortUrl");
         }
       } else {
-        shortUrl_1 = RestTemplateUtil.getRequest(link_1).getString("shortUrl");
+        shortUrl1 = RestTemplateUtil.getRequest(link1).getString("shortUrl");
 
-        if (StringUtils.isEmpty(shortUrl_1)) {
-          shortUrl_1 = RestTemplateUtil.getRequest(link_3).getString("shortUrl");
+        if (StringUtils.isEmpty(shortUrl1)) {
+          shortUrl1 = RestTemplateUtil.getRequest(link3).getString("shortUrl");
         }
-        shortUrl_2 = shortUrl_1;
+        shortUrl2 = shortUrl1;
       }
-      if (StringUtils.isEmpty(shortUrl_1) && StringUtils.isEmpty(shortUrl_2)) {
+      if (StringUtils.isEmpty(shortUrl1) && StringUtils.isEmpty(shortUrl2)) {
         return VueResult.of(VueEnum.TIMES_LIMIT);
       }
       TabDomain tabDomain = new TabDomain();
       tabDomain.setState(usingDomain.getState());
       tabDomain.setDomain(usingDomain.getDomain());
       tabDomain.setServiceTypeId(usingDomain.getServiceTypeId());
-      tabDomain.setWxShortUrl(shortUrl_1);
-      tabDomain.setWxShortUrlTwo(shortUrl_2);
-      logger.info("生成短链1：{}", shortUrl_1);
-      logger.info("生成短链2：{}", shortUrl_2);
-      TDService.save(tabDomain);
+      tabDomain.setWxShortUrl(shortUrl1);
+      tabDomain.setWxShortUrlTwo(shortUrl2);
+      logger.info("生成短链1：{}", shortUrl1);
+      logger.info("生成短链2：{}", shortUrl2);
+      tabDomainService.save(tabDomain);
       if (usingDomain.isUsing()) {
-        UsingIdDTO usingId = TDService.findByUsingId(usingDomain.getServiceTypeId());
+        UsingIdDTO usingId = tabDomainService.findByUsingId(usingDomain.getServiceTypeId());
         TabDomainInUse inUse = new TabDomainInUse();
         inUse.setId(usingId.getId());
         inUse.setDomainId(tabDomain.getId());
-        TDIService.updateById(inUse);
+        tabDomainInUseService.updateById(inUse);
       }
     } catch (Exception e) {
       logger.error("{}: 参数异常", usingDomain.toString());
@@ -205,13 +192,13 @@ public class SysWxController extends BaseController {
   /**
    * 更新或添加域名，也可启用或停止
    *
-   * @param tabDomain
-   * @return
+   * @param tabDomain  域名更新对象
+   * @return 返回添加结果
    */
   @PostMapping
   @Transactional
   public VueResult update(@RequestBody @Valid TabDomain tabDomain) {
-    TDService.saveOrUpdate(tabDomain);
+    tabDomainService.saveOrUpdate(tabDomain);
     return VueResult.success();
   }
 }

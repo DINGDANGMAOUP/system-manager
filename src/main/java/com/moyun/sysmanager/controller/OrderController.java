@@ -18,9 +18,7 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.moyun.sysmanager.Constants.FD;
-import static com.moyun.sysmanager.Constants.QY;
-import static com.moyun.sysmanager.utils.DateUtil.FULL_TIME_SPLIT_PATTERN;
+import static com.moyun.sysmanager.Constants.*;
 
 /**
  * @author dzh
@@ -37,8 +35,8 @@ public class OrderController extends BaseController {
   /**
    * 企业订单
    *
-   * @param orderId
-   * @return
+   * @param orderId 订单id
+   * @return 返回订单详情
    */
   @Log("查询企业取名订单")
   @RequiresAuthentication
@@ -52,7 +50,7 @@ public class OrderController extends BaseController {
       }
         String url = QY + "/complain/detail/orderId/" + trim;
         OrderDTO orderDto = restTemplate.getForObject(url, OrderDTO.class);
-      logger.info(orderDto.getInfo().toString());
+        logger.info(orderDto.getInfo().toString());
       return VueResult.success(orderDto.getInfo());
     } catch (RestClientException e) {
       return VueResult.of(VueEnum.ORDERID_NULL);

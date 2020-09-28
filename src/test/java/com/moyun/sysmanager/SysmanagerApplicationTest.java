@@ -3,10 +3,10 @@ package com.moyun.sysmanager;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+
 @Slf4j
 public class SysmanagerApplicationTest {
-//    @Resource
-//    RestTemplate restTemplate;
+
 
     @Test
     public void test() {

@@ -22,26 +22,26 @@ public class SysNotifyController extends BaseController {
     // 管理员
 
     @Resource
-    TabManagerService TMService;
+    TabManagerService tabManagerService;
     @Resource
     ManagerService managerService;
 
     @GetMapping("manager")
     public VueResult findByManager() {
-        return VueResult.success(TMService.list());
+        return VueResult.success(tabManagerService.list());
     }
 
     /**
      * domainnamechecker
      * 启用或停止 添加通知手机号  域名高可用
      *
-     * @param tabManager
-     * @return
+     * @param tabManager 管理员对象
+     * @return 返回管理员id
      */
     @Log("新增或更新短信通知员")
     @PostMapping("update")
     public VueResult upDateByManager(@RequestBody TabManager tabManager) {
-        TMService.saveOrUpdate(tabManager);
+        tabManagerService.saveOrUpdate(tabManager);
         return VueResult.success(tabManager.getTid());
     }
 
@@ -49,7 +49,7 @@ public class SysNotifyController extends BaseController {
     @Log("删除短信通知员")
     @DeleteMapping("remove")
     public VueResult deleteByManager(@RequestBody TabManager tabManager) {
-        TMService.removeById(tabManager);
+        tabManagerService.removeById(tabManager);
         logger.info("删除管理员-{}", tabManager.getName());
         return VueResult.success();
     }
@@ -74,8 +74,8 @@ public class SysNotifyController extends BaseController {
 
     @Log("删除短信通知员:公众号")
     @DeleteMapping("domainswitcher/remove")
-    public VueResult deleteByManagerOne(@RequestBody Manager Manager) {
-        managerService.removeById(Manager);
+    public VueResult deleteByManagerOne(@RequestBody Manager manager) {
+        managerService.removeById(manager);
         return VueResult.success();
     }
 }
