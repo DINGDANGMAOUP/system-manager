@@ -2,7 +2,6 @@ package com.moyun.sysmanager.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.moyun.sysmanager.common.annotation.Log;
-import com.moyun.sysmanager.common.pojo.DomainUsDTO;
 import com.moyun.sysmanager.common.pojo.UsingDomain;
 import com.moyun.sysmanager.common.pojo.UsingIdDTO;
 import com.moyun.sysmanager.common.result.VueEnum;
@@ -101,22 +100,25 @@ public class SysWxController extends BaseController {
     tabDomain.setState(1);
     tabDomainInUseService.updateById(inUse);
     tabDomainService.updateById(tabDomain);
-    if (serviceTypeId == RESURL || serviceTypeId == NEWONLINEMASTER || serviceTypeId == TESTURL) {
+    if (serviceTypeId.equals(RESURL)
+        || serviceTypeId.equals(NEWONLINEMASTER)
+        || serviceTypeId.equals(TESTURL)) {
       JSONObject request = RestTemplateUtil.getRequest(GET_RESULTS_PAGE);
       RestTemplateUtil.getPostJsonRequest(request, UPDATE_RESULTS_PAGE);
       logger.info(
           "操作时间({})--获取最新结果页域名更新成功（切换操作）",
           DateUtil.formatFullTime(LocalDateTime.now(), FULL_TIME_SPLIT_PATTERN));
     }
-    if (serviceTypeId == OLQM || serviceTypeId == MSTR) {
+    if (serviceTypeId.equals(OLQM) || serviceTypeId.equals(MSTR)) {
       MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-      DomainUsDTO domainUsDto = tabDomainInUseService.findUsingAtDomain(usingDomain.getServiceTypeId());
-      params.add("oldDomainName", domainUsDto.getDomain());
+      TabDomain domain = tabDomainService.getById(usingIdDto.getId());
+      params.add("oldDomainName", domain.getDomain());
       params.add("newDomainName", usingDomain.getDomain());
       RestTemplateUtil.getPostFormRequest(params, UPDATE_MENU_PAGE);
       logger.info(
           "操作时间({})--菜单域名更新成功（切换操作）",
           DateUtil.formatFullTime(LocalDateTime.now(), FULL_TIME_SPLIT_PATTERN));
+      return VueResult.of(VueEnum.SWITCH_FAIL);
     }
     return VueResult.success();
   }
@@ -141,9 +143,7 @@ public class SysWxController extends BaseController {
           StringUtils.replace(CREATE_SHORT_CHAIN_BAK, "{::domain::}", usingDomain.getDomain());
       String link4 =
           StringUtils.replace(
-              CREATE_SHORT_CHAIN_BAK,
-              "{::domain::}",
-              usingDomain.getDomain().replace(OLRS, OLRSO));
+              CREATE_SHORT_CHAIN_BAK, "{::domain::}", usingDomain.getDomain().replace(OLRS, OLRSO));
       String shortUrl1;
       String shortUrl2;
       if (usingDomain.getServiceTypeId() == RESURL || usingDomain.getServiceTypeId() == TESTURL) {
@@ -172,6 +172,7 @@ public class SysWxController extends BaseController {
       tabDomain.setServiceTypeId(usingDomain.getServiceTypeId());
       tabDomain.setWxShortUrl(shortUrl1);
       tabDomain.setWxShortUrlTwo(shortUrl2);
+      logger.info("需要生成短链的域名：{}",usingDomain.getDomain());
       logger.info("生成短链1：{}", shortUrl1);
       logger.info("生成短链2：{}", shortUrl2);
       tabDomainService.save(tabDomain);
@@ -192,7 +193,7 @@ public class SysWxController extends BaseController {
   /**
    * 更新或添加域名，也可启用或停止
    *
-   * @param tabDomain  域名更新对象
+   * @param tabDomain 域名更新对象
    * @return 返回添加结果
    */
   @PostMapping

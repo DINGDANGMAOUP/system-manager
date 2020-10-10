@@ -19,7 +19,7 @@ public class OrderDTO implements Serializable {
      * message :
      */
 
-    private int code;
+    private Integer code;
     private List<Info> info;
     private String message;
 

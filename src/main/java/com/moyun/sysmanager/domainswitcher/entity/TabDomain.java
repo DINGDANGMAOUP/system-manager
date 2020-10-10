@@ -2,7 +2,6 @@ package com.moyun.sysmanager.domainswitcher.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -10,6 +9,9 @@ import lombok.experimental.Accessors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+
+import static com.moyun.sysmanager.Constants.DOMAIN;
 
 /**
  * 域名表
@@ -31,9 +33,7 @@ public class TabDomain implements Serializable {
 
   /** 域名 */
   @NotBlank
-  @Pattern(
-          regexp =
-                  "^(?=^.{3,255}$)(http(s)?:\\/\\/)?(www\\.)?[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\\d+)*(\\/\\w+\\.\\w+)*$",message = "请输入正确的域名")
+  @Pattern(regexp = DOMAIN, message = "请输入正确的域名")
   private String domain;
 
   @NotNull
