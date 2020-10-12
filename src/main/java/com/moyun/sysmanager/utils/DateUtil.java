@@ -16,20 +16,20 @@ import static com.moyun.sysmanager.Constants.FULL_TIME_PATTERN;
  */
 public class DateUtil {
 
-    public static String now(String pattern) {
-        return DateUtil.formatFullTime(LocalDateTime.now(), pattern);
-    }
+  public static String now(String pattern) {
+    return DateUtil.formatFullTime(LocalDateTime.now(), pattern);
+  }
 
-    public static String formatFullTime(LocalDateTime localDateTime) {
-        return formatFullTime(localDateTime, FULL_TIME_PATTERN);
-    }
+  public static String formatFullTime(LocalDateTime localDateTime) {
+    return formatFullTime(localDateTime, FULL_TIME_PATTERN);
+  }
 
-    public static String formatFullTime(LocalDateTime localDateTime, String pattern) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
-        return localDateTime.format(dateTimeFormatter);
-    }
+  public static String formatFullTime(LocalDateTime localDateTime, String pattern) {
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
+    return localDateTime.format(dateTimeFormatter);
+  }
 
-    private static String getDateFormat(Date date, String dateFormatType) {
+  private static String getDateFormat(Date date, String dateFormatType) {
     SimpleDateFormat simformat = new SimpleDateFormat(dateFormatType);
     return simformat.format(date);
   }
