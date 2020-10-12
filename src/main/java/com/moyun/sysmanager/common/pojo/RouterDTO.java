@@ -13,13 +13,13 @@ public class RouterDTO implements Cloneable {
 
     private String metaId;
 
-    private Integer hidden;
+    private String hidden;
 
     private String redirect;
 
     @TableField("`always_show`")
-    private Integer alwaysShow;
+    private String alwaysShow;
 
-    private Integer parentId;
+    private String parentId;
     MetaDTO meta;
 }
