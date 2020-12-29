@@ -1,7 +1,15 @@
 package com.moyun.sysmanager;
 
+import com.alibaba.fastjson.JSONObject;
+import com.moyun.sysmanager.domainswitcher.entity.TabDomain;
+import com.moyun.sysmanager.utils.ReplacePrefixUtil;
+import com.moyun.sysmanager.utils.RestTemplateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+
+import static com.moyun.sysmanager.Constants.*;
 
 
 @Slf4j
@@ -20,5 +28,11 @@ public class SysmanagerApplicationTest {
 //        map.put("url","http://olrs.jm9l.top");
 //        ShortUrlDTO object = template.getForObject(link_1, ShortUrlDTO.class);
 //        log.info(object.toString());
+//        TabDomain domain = tabDomainService.getById(usingIdDto.getId());
+//        JSONObject request = RestTemplateUtil.getRequest(GET_RESULTS_PAGE);
+//        JSONObject object = RestTemplateUtil.getPostJsonRequest(request, UPDATE_RESULTS_PAGE);
+//        log.info(object.toJSONString());
+//        log.info(request);
+
     }
 }

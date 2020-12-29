@@ -12,6 +12,7 @@ import com.moyun.sysmanager.domainswitcher.service.TabDomainInUseService;
 import com.moyun.sysmanager.domainswitcher.service.TabDomainService;
 import com.moyun.sysmanager.exception.CustmerException;
 import com.moyun.sysmanager.utils.DateUtil;
+import com.moyun.sysmanager.utils.ReplacePrefixUtil;
 import com.moyun.sysmanager.utils.RestTemplateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -112,8 +113,8 @@ public class SysWxController extends BaseController {
     if (serviceTypeId.equals(OLQM) || serviceTypeId.equals(MSTR)) {
       MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
       TabDomain domain = tabDomainService.getById(usingIdDto.getId());
-      params.add("oldDomainName", domain.getDomain());
-      params.add("newDomainName", usingDomain.getDomain());
+      params.add("oldDomainName", ReplacePrefixUtil.run(domain.getDomain()) );
+      params.add("newDomainName",ReplacePrefixUtil.run(usingDomain.getDomain()) );
       RestTemplateUtil.getPostFormRequest(params, UPDATE_MENU_PAGE);
       logger.info(
           "操作时间({})--菜单域名更新成功（切换操作）",

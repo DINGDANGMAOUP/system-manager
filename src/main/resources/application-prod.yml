@@ -33,16 +33,6 @@ spring:
   jackson:
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
     default-property-inclusion: non_null
-  thymeleaf:
-    cache: false
-    enabled: true
-    prefix: classpath:/templates/
-    suffix: .html
-    #严格执行H5标准
-    mode: LEGACYHTML5
-    encoding: UTF-8
-    servlet:
-      content-type: text/html
 #mybatis plus 设置
 mybatis-plus:
   type-aliases-package: com.moyun.sysmanager.domainnamechecker.entity,com.moyun.sysmanager.domainswitcher.entity,com.moyun.sysmanager.domainnamechecker.web.entity
