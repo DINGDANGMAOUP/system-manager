@@ -22,6 +22,7 @@ public class TabDomainNameServiceImpl
 
   @Override
   public List<TabDomainName> listSort() {
+    
       return dncTabDomainNameMapper.selectList(
               Wrappers.<TabDomainName>lambdaQuery().select().orderByAsc(TabDomainName::getTid));
   }

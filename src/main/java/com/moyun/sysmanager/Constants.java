@@ -53,7 +53,7 @@ public final class Constants {
     /**
      * 菜单域名高可用更新
      */
-    public static final String UPDATE_MENU_PAGE = "http://my9f.top/shortLink/updateDomainName";
+    public static final String UPDATE_MENU_PAGE = "http://my7n.top/shortLink/updateDomainName";
     /**
      * 企业投诉订单查询
      */

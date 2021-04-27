@@ -12,39 +12,39 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController extends BaseController{
 
 
-    @Async
+//    @Async
     @GetMapping("test")
-    public VueResult testResult() throws InterruptedException {
+    public String testResult() throws InterruptedException {
         System.out.println("开始啦");
-        testAsync();
+//        testAsync();
         System.out.println("test");
-        return VueResult.success("lalla");
+        return "hello";
 
     }
-    @Async
-    private void testAsync() throws InterruptedException {
-
-        /*Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, 2020);//年
-        calendar.set(Calendar.MONTH, 5);//月
-        calendar.set(Calendar.DATE , 18);//日
-        calendar.set(Calendar.HOUR_OF_DAY, 9);//时
-
-        calendar.set(Calendar.MINUTE, 20);//分
-
-        calendar.set(Calendar.SECOND, 0);//秒
-
-
-
-        Date time = calendar.getTime();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String timeFormat = sdf.format(time);*/
-
-
-        Thread.sleep(5000);
-        System.out.println("结束啦");
-    }
+//    @Async
+//    private void testAsync() throws InterruptedException {
+//
+//        /*Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.YEAR, 2020);//年
+//        calendar.set(Calendar.MONTH, 5);//月
+//        calendar.set(Calendar.DATE , 18);//日
+//        calendar.set(Calendar.HOUR_OF_DAY, 9);//时
+//
+//        calendar.set(Calendar.MINUTE, 20);//分
+//
+//        calendar.set(Calendar.SECOND, 0);//秒
+//
+//
+//
+//        Date time = calendar.getTime();
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String timeFormat = sdf.format(time);*/
+//
+//
+//        Thread.sleep(5000);
+//        System.out.println("结束啦");
+//    }
 
 
 //    @GetMapping("/startCron1")

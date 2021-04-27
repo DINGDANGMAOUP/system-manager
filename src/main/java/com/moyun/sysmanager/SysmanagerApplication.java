@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @SpringBootApplication
-@Controller
 @EnableAsync
 public class SysmanagerApplication {
 
